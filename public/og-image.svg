@@ -1,0 +1,21 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050816" />
+      <stop offset="1" stop-color="#0c1533" />
+    </linearGradient>
+    <linearGradient id="glow" x1="360" y1="140" x2="840" y2="490" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5EEAD4" />
+      <stop offset="1" stop-color="#60A5FA" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="48" fill="url(#bg)"/>
+  <circle cx="920" cy="140" r="120" fill="#1F3B67" opacity="0.35"/>
+  <circle cx="250" cy="480" r="160" fill="#102447" opacity="0.45"/>
+  <g stroke="url(#glow)" stroke-width="10">
+    <path d="M600 165C552 165 513 204 513 252C513 287 534 317 566 330V372H468C452 372 440 384 440 400V412C440 493 509 560 600 560C691 560 760 493 760 412V400C760 384 748 372 732 372H634V330C666 317 687 287 687 252C687 204 648 165 600 165Z"/>
+    <path d="M520 440C520 486 557 523 603 523C649 523 686 486 686 440" stroke-linecap="round"/>
+  </g>
+  <text x="120" y="230" font-family="'Inter', sans-serif" font-size="64" fill="#E2E8F0">Anchor</text>
+  <text x="120" y="300" font-family="'Inter', sans-serif" font-size="32" fill="#94A3B8">Enterprise support copilot with secure multi-tenant RAG.</text>
+</svg>
