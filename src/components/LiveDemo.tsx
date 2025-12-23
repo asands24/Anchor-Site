@@ -72,6 +72,8 @@ export const LiveDemo: React.FC = () => {
           This is a live instance of the SupportCopilot widget connected to a public demo tenant.
           <br />
           <span className="text-xs uppercase tracking-widest text-anchor-blue-500/70 border border-anchor-blue-500/30 px-2 py-1 rounded mt-2 inline-block">Public Tenant • Rate Limited • Logs Reset Daily</span>
+          <br />
+          <span className="text-xs text-red-300/80 mt-2 block"> Please do not enter sensitive or personal data.</span>
         </p>
 
         <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto items-stretch h-[600px]">

@@ -1,30 +1,22 @@
 import React from 'react';
-import { OceanShell } from './components/OceanShell';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { TrustBar } from './components/TrustBar';
-import { Features } from './components/Features';
-import { Architecture } from './components/Architecture';
-import { DeveloperSection } from './components/DeveloperSection';
-import { LiveDemo } from './components/LiveDemo';
-import { Security } from './components/Security';
-import { CTA } from './components/CTA';
-import { Footer } from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { Privacy } from './pages/Privacy';
+import { Terms } from './pages/Terms';
+import { Security } from './pages/Security';
+import { Contact } from './pages/Contact';
 
 function App() {
   return (
-    <OceanShell>
-      <Navbar />
-      <Hero />
-      <TrustBar />
-      <Features />
-      <Architecture />
-      <DeveloperSection />
-      <LiveDemo />
-      <Security />
-      <CTA />
-      <Footer />
-    </OceanShell>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/security" element={<Security />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
 

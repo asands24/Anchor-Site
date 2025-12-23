@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
@@ -13,12 +14,13 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="text-anchor-slate/40 text-sm">
-          © {new Date().getFullYear()} Anchor Reference Implementation. Not a real startup.
+          © {new Date().getFullYear()} S&S Technologies.
         </div>
 
-        <div className="flex gap-6">
-          <a href="#" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">GitHub</a>
-          <a href="#" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Documentation</a>
+        <div className="flex gap-6 text-sm">
+          <Link to="/privacy" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Privacy</Link>
+          <Link to="/terms" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Terms</Link>
+          <Link to="/security" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Security</Link>
         </div>
       </div>
     </footer>
