@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const sequence = [
+const KONAMI_CODE = [
   'ArrowUp',
   'ArrowUp',
   'ArrowDown',
@@ -10,35 +10,31 @@ const sequence = [
   'ArrowLeft',
   'ArrowRight',
   'b',
-  'a'
+  'a',
 ];
 
-const useKonami = () => {
-  const [enabled, setEnabled] = useState(false);
+export const useKonami = (): boolean => {
+  const [activated, setActivated] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    let index = 0;
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      const key = event.key.toLowerCase();
-      const expected = sequence[index].toLowerCase();
-
-      if (key === expected) {
-        index += 1;
-        if (index === sequence.length) {
-          setEnabled((prev) => !prev);
-          index = 0;
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === KONAMI_CODE[index]) {
+        const nextIndex = index + 1;
+        if (nextIndex === KONAMI_CODE.length) {
+          setActivated((prev) => !prev);
+          setIndex(0);
+        } else {
+          setIndex(nextIndex);
         }
       } else {
-        index = key === sequence[0].toLowerCase() ? 1 : 0;
+        setIndex(0);
       }
     };
 
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, [index]);
 
-  return enabled;
+  return activated;
 };
-
-export default useKonami;

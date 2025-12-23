@@ -1,30 +1,31 @@
-import CTA from './components/CTA';
-import DevSection from './components/DevSection';
-import Features from './components/Features';
-import Footer from './components/Footer';
-import Hero from './components/Hero';
-import LiveDemo from './components/LiveDemo';
-import Navbar from './components/Navbar';
-import OceanShell from './components/OceanShell';
-import Security from './components/Security';
-import TrustBar from './components/TrustBar';
+import React from 'react';
+import { OceanShell } from './components/OceanShell';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { TrustBar } from './components/TrustBar';
+import { Features } from './components/Features';
+import { Architecture } from './components/Architecture';
+import { DeveloperSection } from './components/DeveloperSection';
+import { LiveDemo } from './components/LiveDemo';
+import { Security } from './components/Security';
+import { CTA } from './components/CTA';
+import { Footer } from './components/Footer';
 
-const App = () => {
+function App() {
   return (
     <OceanShell>
       <Navbar />
-      <main>
-        <Hero />
-        <TrustBar />
-        <Features />
-        <DevSection />
-        <LiveDemo />
-        <Security />
-        <CTA />
-      </main>
+      <Hero />
+      <TrustBar />
+      <Features />
+      <Architecture />
+      <DeveloperSection />
+      <LiveDemo />
+      <Security />
+      <CTA />
       <Footer />
     </OceanShell>
   );
-};
+}
 
 export default App;

@@ -1,26 +1,26 @@
-const Footer = () => {
+import React from 'react';
+
+export const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-white/10 py-10">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-400/40 bg-cyan-500/10 shadow-glow">
-            <span className="text-sm font-semibold text-cyan-200">A</span>
+    <footer className="py-12 border-t border-anchor-slate/5 bg-anchor-blue-900">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-full border-2 border-anchor-slate/30 flex items-center justify-center text-anchor-slate/50 font-bold text-xs">
+            A
           </div>
-          <div>
-            <p className="text-white">Anchor</p>
-            <p className="text-xs text-slate-500">Enterprise Support Copilot</p>
-          </div>
+          <span className="text-anchor-slate/50 font-medium">Anchor</span>
         </div>
-        <div className="flex flex-wrap gap-6">
-          <a className="transition hover:text-white" href="#features">Features</a>
-          <a className="transition hover:text-white" href="#developers">Developers</a>
-          <a className="transition hover:text-white" href="#demo">Live Demo</a>
-          <a className="transition hover:text-white" href="mailto:pilot@anchor.ai">Request a pilot</a>
+
+        <div className="text-anchor-slate/40 text-sm">
+          © {new Date().getFullYear()} Anchor Reference Implementation. Not a real startup.
         </div>
-        <p className="text-xs text-slate-500">© 2024 Anchor Labs. All rights reserved.</p>
+
+        <div className="flex gap-6">
+          <a href="#" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">GitHub</a>
+          <a href="#" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Documentation</a>
+        </div>
       </div>
     </footer>
   );
 };
-
-export default Footer;

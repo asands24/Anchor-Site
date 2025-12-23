@@ -1,31 +1,27 @@
-const CTA = () => {
+import React from 'react';
+
+export const CTA: React.FC = () => {
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 pb-20 pt-10">
-      <div className="rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/10 via-transparent to-indigo-500/10 p-10 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">Ready to anchor your support?</p>
-        <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
-          Bring Anchor to your customers in a single sprint.
+    <section className="py-24 text-center">
+      <div className="container mx-auto px-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+          Ready to drop anchor?
         </h2>
-        <p className="mt-4 text-slate-300">
-          Pilot with one tenant, then scale across your customer base with confidence.
+        <p className="text-xl text-anchor-slate mb-12 max-w-2xl mx-auto">
+          Stop building chatbots from scratch. Start with a solid, enterprise-grade foundation.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <a
-            className="rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-900 shadow-glow transition hover:bg-cyan-400"
-            href="#demo"
+            href="https://github.com/asands24/Anchor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 rounded-md bg-anchor-blue-500 text-anchor-blue-900 font-bold hover:bg-anchor-blue-500/90 transition-all text-lg shadow-[0_0_20px_rgba(100,255,218,0.3)]"
           >
-            Try the live demo
-          </a>
-          <a
-            className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-400/60 hover:text-cyan-200"
-            href="mailto:pilot@anchor.ai"
-          >
-            Request a pilot
+            View Source on GitHub
           </a>
         </div>
       </div>
     </section>
   );
 };
-
-export default CTA;

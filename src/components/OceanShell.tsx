@@ -1,41 +1,58 @@
-import { PropsWithChildren } from 'react';
-import useKonami from '../lib/useKonami';
+import React, { useEffect, useState } from 'react';
+import { useKonami } from '../lib/useKonami';
 
-const bubbles = [
-  { size: 120, top: '20%', left: '8%', delay: '0s' },
-  { size: 80, top: '42%', left: '82%', delay: '1s' },
-  { size: 60, top: '68%', left: '20%', delay: '2s' },
-  { size: 140, top: '78%', left: '70%', delay: '3s' }
-];
+interface OceanShellProps {
+  children: React.ReactNode;
+}
 
-const OceanShell = ({ children }: PropsWithChildren) => {
-  const deepDive = useKonami();
+export const OceanShell: React.FC<OceanShellProps> = ({ children }) => {
+  const isDeepDive = useKonami();
+  const [bubbles, setBubbles] = useState<number[]>([]);
+
+  useEffect(() => {
+    // Generate random bubbles
+    const bubbleCount = 20;
+    const newBubbles = Array.from({ length: bubbleCount }, (_, i) => i);
+    setBubbles(newBubbles);
+  }, []);
 
   return (
-    <div className={`ocean-shell ${deepDive ? 'deep-dive' : ''}`}>
-      {bubbles.map((bubble) => (
-        <span
-          key={`${bubble.size}-${bubble.left}`}
-          className="bubble"
-          style={{
-            width: bubble.size,
-            height: bubble.size,
-            top: bubble.top,
-            left: bubble.left,
-            animationDelay: bubble.delay
-          }}
-        />
-      ))}
-      <div className="ocean-content">
-        {deepDive && (
-          <div className="fixed bottom-6 right-6 z-50 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-2 text-xs uppercase tracking-[0.3em] text-cyan-200 shadow-glow">
-            Deep Dive Mode
-          </div>
-        )}
+    <div className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isDeepDive ? 'brightness-125' : ''}`}>
+      {/* Background Gradients */}
+      <div className="fixed inset-0 bg-anchor-blue-900 -z-20" />
+      <div className="fixed inset-0 bg-gradient-to-b from-anchor-blue-900 via-anchor-blue-800 to-anchor-blue-900 opacity-80 -z-10" />
+
+      {/* Radial Glow */}
+      <div className="fixed top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(100,255,218,0.03),transparent_50%)] -z-10 pointer-events-none" />
+
+      {/* Bubbles */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        {bubbles.map((i) => (
+          <div
+            key={i}
+            className="bubble"
+            style={{
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 10 + 5}px`,
+              height: `${Math.random() * 10 + 5}px`,
+              animationDelay: `${Math.random() * 15}s`,
+              animationDuration: `${15 + Math.random() * 15}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
         {children}
       </div>
+
+      {/* Deep Dive Indicator */}
+      {isDeepDive && (
+        <div className="fixed bottom-4 right-4 text-anchor-blue-500 text-xs opacity-50 font-mono animate-pulse">
+          DEEP DIVE MODE ACTIVE
+        </div>
+      )}
     </div>
   );
 };
-
-export default OceanShell;

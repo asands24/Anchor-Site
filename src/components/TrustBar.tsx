@@ -1,22 +1,21 @@
-const logos = ['HarborStack', 'Lattice', 'BlueCurrent', 'Keystone', 'HelixWorks'];
+import React from 'react';
 
-const TrustBar = () => {
+export const TrustBar: React.FC = () => {
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 pb-12">
-      <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-6">
-        <p className="text-center text-xs uppercase tracking-[0.3em] text-slate-400">
-          Trusted by teams scaling human-grade support
+    <div className="border-y border-anchor-slate/10 bg-anchor-blue-900/30 backdrop-blur-sm">
+      <div className="container mx-auto py-8">
+        <p className="text-center text-sm font-semibold text-anchor-slate mb-6 uppercase tracking-widest opacity-70">
+          The Enterprise Standard For
         </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-300">
-          {logos.map((logo) => (
-            <span key={logo} className="rounded-full border border-white/10 bg-deep-800/70 px-4 py-2">
-              {logo}
-            </span>
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+          {['Security', 'Isolation', 'Observability', 'Scalability'].map((item) => (
+            <div key={item} className="flex items-center gap-2 group">
+              <div className="w-2 h-2 rounded-full bg-anchor-blue-500 group-hover:shadow-[0_0_10px_#64ffda]" />
+              <span className="text-lg font-bold text-white tracking-wide">{item}</span>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
-
-export default TrustBar;

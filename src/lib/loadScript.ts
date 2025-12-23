@@ -1,21 +1,14 @@
-const loadedScripts = new Map<string, Promise<void>>();
-
-const loadScript = (src: string) => {
-  if (loadedScripts.has(src)) {
-    return loadedScripts.get(src)!;
-  }
-
-  const promise = new Promise<void>((resolve, reject) => {
+export const loadScript = (src: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) {
+      resolve();
+      return;
+    }
     const script = document.createElement('script');
     script.src = src;
     script.async = true;
     script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Failed to load ${src}`));
+    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
     document.body.appendChild(script);
   });
-
-  loadedScripts.set(src, promise);
-  return promise;
 };
-
-export default loadScript;

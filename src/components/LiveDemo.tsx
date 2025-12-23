@@ -1,141 +1,137 @@
-import { useEffect, useRef, useState } from 'react';
-import loadScript from '../lib/loadScript';
+import React, { useEffect, useState } from 'react';
+import { loadScript } from '../lib/loadScript';
 
 declare global {
   interface Window {
     SupportCopilot?: {
-      init: (config: { mount: HTMLElement; tenantSlug: string; apiBaseUrl: string }) => void;
+      init: (config: any) => void;
+      toggle?: () => void;
       open?: () => void;
       setInput?: (input: string) => void;
-    };
+    }
   }
 }
 
-const suggestedQuestions = [
-  'How does tenant isolation work?',
-  'Show me recent retrieval logs.',
-  'How do I embed the widget?',
-  'What does the ingestion CLI support?'
+const DEMO_QUESTIONS = [
+  "How does Anchor handle multi-tenancy?",
+  "Can I customize the widget color?",
+  "Is my data used to train models?",
+  "What is the pricing model?"
 ];
 
-const LiveDemo = () => {
-  const mountRef = useRef<HTMLDivElement | null>(null);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-
-  const widgetSrc = import.meta.env.VITE_WIDGET_SRC as string | undefined;
-  const apiBaseUrl = import.meta.env.VITE_API_BASE as string | undefined;
-  const tenantSlug = (import.meta.env.VITE_DEMO_TENANT as string | undefined) ?? 'demo';
+export const LiveDemo: React.FC = () => {
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
   useEffect(() => {
-    if (!widgetSrc || !apiBaseUrl) {
-      setStatus('error');
-      setMessage('Add VITE_WIDGET_SRC and VITE_API_BASE to your .env file to load the demo widget.');
-      return;
-    }
-
-    if (!mountRef.current) {
-      return;
-    }
-
-    setStatus('loading');
-    loadScript(widgetSrc)
-      .then(() => {
-        if (!window.SupportCopilot?.init) {
-          throw new Error('SupportCopilot.init is not available.');
+    const initWidget = async () => {
+      try {
+        const widgetSrc = import.meta.env.VITE_WIDGET_SRC;
+        if (!widgetSrc) {
+          console.warn('VITE_WIDGET_SRC not set');
+          setStatus('error');
+          return;
         }
 
-        window.SupportCopilot.init({
-          mount: mountRef.current!,
-          tenantSlug,
-          apiBaseUrl
-        });
-        setStatus('ready');
-      })
-      .catch((error) => {
-        setStatus('error');
-        setMessage(
-          error instanceof Error
-            ? error.message
-            : 'We could not load the widget. Verify the script URL and try again.'
-        );
-      });
-  }, [widgetSrc, apiBaseUrl, tenantSlug]);
+        await loadScript(widgetSrc);
 
-  const handleSuggestion = (question: string) => {
-    if (!window.SupportCopilot) {
-      return;
+        if (window.SupportCopilot) {
+          window.SupportCopilot.init({
+            mount: "#support-copilot-mount",
+            tenantSlug: import.meta.env.VITE_DEMO_TENANT || "demo",
+            apiBaseUrl: import.meta.env.VITE_API_BASE,
+          });
+          setStatus('ready');
+        } else {
+          throw new Error('SupportCopilot not found on window');
+        }
+      } catch (err) {
+        console.error('Failed to load widget:', err);
+        setStatus('error');
+      }
+    };
+
+    // Small timeout to allow hydration
+    const timer = setTimeout(initWidget, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleQuestionClick = (question: string) => {
+    if (window.SupportCopilot?.setInput) {
+      window.SupportCopilot.open?.(); // Ensure it's open
+      window.SupportCopilot.setInput(question);
     }
-    window.SupportCopilot.open?.();
-    window.SupportCopilot.setInput?.(question);
   };
 
   return (
-    <section id="demo" className="mx-auto w-full max-w-6xl px-6 py-16">
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr]">
-        <div className="space-y-5">
-          <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">Live Demo</p>
-          <h2 className="text-3xl font-semibold text-white sm:text-4xl">Try Anchor live.</h2>
-          <p className="text-slate-300">
-            Ask the copilot about your product docs, security posture, or onboarding flow. Anchor streams answers and
-            keeps the conversation stored locally so your customers never lose context.
-          </p>
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-slate-200">Suggested questions</p>
-            <div className="flex flex-wrap gap-3">
-              {suggestedQuestions.map((question) => (
-                <button
-                  key={question}
-                  className="rounded-full border border-white/20 px-4 py-2 text-xs text-slate-200 transition hover:border-cyan-400/60 hover:text-cyan-200"
-                  onClick={() => handleSuggestion(question)}
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-slate-400">
-            Demo tenant: <span className="text-slate-200">{tenantSlug}</span>
-          </div>
-        </div>
-        <div className="rounded-3xl border border-white/10 bg-deep-800/70 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Support Widget</p>
-              <p className="text-lg font-semibold text-white">Anchor Live</p>
-            </div>
-            <span
-              className={`rounded-full border px-3 py-1 text-xs ${
-                status === 'ready'
-                  ? 'border-cyan-400/40 bg-cyan-500/10 text-cyan-200'
-                  : status === 'loading'
-                    ? 'border-yellow-400/40 bg-yellow-500/10 text-yellow-200'
-                    : 'border-white/10 bg-white/5 text-slate-300'
-              }`}
-            >
-              {status === 'ready' ? 'Connected' : status === 'loading' ? 'Loading' : 'Offline'}
-            </span>
-          </div>
-          <div className="mt-6 rounded-2xl border border-white/10 bg-deep-900/60 p-4">
-            {status === 'error' ? (
-              <div className="space-y-3 text-sm text-slate-300">
-                <p>We could not load the widget.</p>
-                <p className="text-xs text-slate-400">{message}</p>
-                <p className="text-xs text-slate-400">
-                  Verify that your widget script allows embedding and that the API base URL is reachable.
-                </p>
+    <section id="demo" className="py-24 bg-gradient-to-b from-anchor-blue-900/0 to-anchor-blue-900/50">
+      <div className="container mx-auto px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          See it in action
+        </h2>
+        <p className="text-anchor-slate mb-12 max-w-2xl mx-auto">
+          This is a live instance of the SupportCopilot widget connected to a public demo tenant.
+          <br />
+          <span className="text-xs uppercase tracking-widest text-anchor-blue-500/70 border border-anchor-blue-500/30 px-2 py-1 rounded mt-2 inline-block">Public Tenant • Rate Limited • Logs Reset Daily</span>
+        </p>
+
+        <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto items-stretch h-[600px]">
+
+          {/* Controls Side */}
+          <div className="lg:w-1/3 flex flex-col gap-4 text-left">
+            <div className="p-6 rounded-lg bg-anchor-blue-800/20 border border-anchor-blue-500/10">
+              <h3 className="text-white font-bold mb-4">Try these questions:</h3>
+              <div className="space-y-3">
+                {DEMO_QUESTIONS.map((q, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleQuestionClick(q)}
+                    className="w-full text-left p-3 rounded bg-anchor-blue-900/50 hover:bg-anchor-blue-800 transition-colors text-anchor-slate text-sm border border-transparent hover:border-anchor-blue-500/30"
+                  >
+                    {q}
+                  </button>
+                ))}
               </div>
-            ) : (
-              <div
-                ref={mountRef}
-                className="min-h-[320px] rounded-xl border border-dashed border-white/10 bg-gradient-to-br from-white/5 to-transparent"
-              />
-            )}
+            </div>
+
+            <div className="flex-1 p-6 rounded-lg bg-anchor-blue-800/20 border border-anchor-blue-500/10 flex flex-col justify-center items-center text-center">
+              <div className={`w-3 h-3 rounded-full mb-2 ${status === 'ready' ? 'bg-green-500 animate-pulse' : status === 'error' ? 'bg-red-500' : 'bg-yellow-500'}`} />
+              <p className="text-sm font-mono text-anchor-slate uppercase">
+                System Status: {status}
+              </p>
+            </div>
           </div>
+
+          {/* Widget Mount Point */}
+          <div className="lg:w-2/3 relative rounded-xl bg-anchor-blue-900 border border-anchor-blue-500/20 shadow-2xl overflow-hidden flex flex-col">
+            <div className="bg-anchor-blue-900/80 p-4 border-b border-anchor-blue-500/10 flex items-center justify-between">
+              <span className="text-sm font-medium text-anchor-slate">Live Preview</span>
+              <div className="flex gap-2">
+                <div className="w-2 h-2 rounded-full bg-red-500/20" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500/20" />
+                <div className="w-2 h-2 rounded-full bg-green-500/20" />
+              </div>
+            </div>
+
+            <div className="flex-1 relative bg-white/5">
+              {status === 'loading' && (
+                <div className="absolute inset-0 flex items-center justify-center text-anchor-slate animate-pulse">
+                  Initializing Widget...
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="absolute inset-0 flex items-center justify-center text-red-400">
+                  Widget failed to load. Please check console.
+                </div>
+              )}
+
+              {/* The actual mount point */}
+              <div id="support-copilot-mount" className="w-full h-full" />
+
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
   );
 };
-
-export default LiveDemo;
