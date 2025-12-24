@@ -4,11 +4,15 @@ import { loadScript } from '../lib/loadScript';
 declare global {
   interface Window {
     SupportCopilot?: {
-      init: (config: any) => void;
+      init: (config: {
+        mount: string | HTMLElement;
+        tenantSlug: string;
+        apiUrl: string;
+      }) => void;
       toggle?: () => void;
       open?: () => void;
       setInput?: (input: string) => void;
-    }
+    };
   }
 }
 
@@ -20,32 +24,75 @@ const DEMO_QUESTIONS = [
 ];
 
 export const LiveDemo: React.FC = () => {
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error' | 'warning'>('loading');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [diagnosticMessage, setDiagnosticMessage] = useState<string | null>(null);
+  const [widgetMounted, setWidgetMounted] = useState(false);
+  const debugEnabled =
+    import.meta.env.DEV || new URLSearchParams(window.location.search).has('debug');
 
   useEffect(() => {
     const initWidget = async () => {
+      const widgetSrc = import.meta.env.VITE_WIDGET_SRC;
+      const apiUrl = import.meta.env.VITE_API_BASE;
+      const tenantSlug = import.meta.env.VITE_DEMO_TENANT || 'demo';
+      const mount: string | HTMLElement = '#support-copilot-mount';
+
+      setErrorMessage(null);
+      setDiagnosticMessage(null);
+      setWidgetMounted(false);
+
       try {
-        const widgetSrc = import.meta.env.VITE_WIDGET_SRC;
         if (!widgetSrc) {
-          console.warn('VITE_WIDGET_SRC not set');
-          setStatus('error');
-          return;
+          throw new Error('VITE_WIDGET_SRC is not set');
+        }
+
+        if (!apiUrl) {
+          throw new Error('VITE_API_BASE is not set');
         }
 
         await loadScript(widgetSrc);
 
-        if (window.SupportCopilot) {
-          window.SupportCopilot.init({
-            mount: "#support-copilot-mount",
-            tenantSlug: import.meta.env.VITE_DEMO_TENANT || "demo",
-            apiBaseUrl: import.meta.env.VITE_API_BASE,
-          });
-          setStatus('ready');
-        } else {
+        if (!window.SupportCopilot) {
           throw new Error('SupportCopilot not found on window');
         }
+
+        try {
+          window.SupportCopilot.init({
+            mount,
+            tenantSlug,
+            apiUrl,
+          });
+        } catch (error) {
+          throw new Error(
+            `SupportCopilot.init failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+        }
+
+        setStatus('ready');
+
+        const mountElement =
+          typeof mount === 'string' ? document.querySelector(mount) : mount;
+
+        if (!mountElement) {
+          throw new Error('Widget mount element not found');
+        }
+
+        setTimeout(() => {
+          const isEmpty = !mountElement.hasChildNodes();
+          if (isEmpty) {
+            setStatus('warning');
+            setDiagnosticMessage(
+              'Widget mounted but UI did not render. Check console/network logs, verify API endpoints, and confirm CORS settings.'
+            );
+          } else {
+            setWidgetMounted(true);
+          }
+        }, 400);
       } catch (err) {
+        const message = err instanceof Error ? err.message : 'Unknown error';
         console.error('Failed to load widget:', err);
+        setErrorMessage(message);
         setStatus('error');
       }
     };
@@ -96,11 +143,34 @@ export const LiveDemo: React.FC = () => {
             </div>
 
             <div className="flex-1 p-6 rounded-lg bg-anchor-blue-800/20 border border-anchor-blue-500/10 flex flex-col justify-center items-center text-center">
-              <div className={`w-3 h-3 rounded-full mb-2 ${status === 'ready' ? 'bg-green-500 animate-pulse' : status === 'error' ? 'bg-red-500' : 'bg-yellow-500'}`} />
+              <div
+                className={`w-3 h-3 rounded-full mb-2 ${status === 'ready' ? 'bg-green-500 animate-pulse' : status === 'warning' ? 'bg-yellow-500' : status === 'error' ? 'bg-red-500' : 'bg-yellow-500'}`}
+              />
               <p className="text-sm font-mono text-anchor-slate uppercase">
                 System Status: {status}
               </p>
+              {errorMessage && (
+                <p className="text-xs text-red-300 mt-3">{errorMessage}</p>
+              )}
+              {diagnosticMessage && (
+                <p className="text-xs text-yellow-200/80 mt-3">
+                  {diagnosticMessage}
+                </p>
+              )}
             </div>
+
+            {debugEnabled && (
+              <div className="p-4 rounded-lg bg-anchor-blue-800/10 border border-anchor-blue-500/10 text-left text-xs text-anchor-slate space-y-2">
+                <div className="text-anchor-blue-200 uppercase tracking-widest text-[10px]">
+                  Debug panel
+                </div>
+                <div>widgetSrc: {import.meta.env.VITE_WIDGET_SRC || 'unset'}</div>
+                <div>apiUrl: {import.meta.env.VITE_API_BASE || 'unset'}</div>
+                <div>tenantSlug: {import.meta.env.VITE_DEMO_TENANT || 'demo'}</div>
+                <div>SupportCopilot: {window.SupportCopilot ? 'available' : 'missing'}</div>
+                <div>Mounted: {widgetMounted ? 'yes' : 'no'}</div>
+              </div>
+            )}
           </div>
 
           {/* Widget Mount Point */}
@@ -121,8 +191,13 @@ export const LiveDemo: React.FC = () => {
                 </div>
               )}
               {status === 'error' && (
-                <div className="absolute inset-0 flex items-center justify-center text-red-400">
-                  Widget failed to load. Please check console.
+                <div className="absolute inset-0 flex items-center justify-center text-red-400 text-center px-6">
+                  {errorMessage || 'Widget failed to load. Please check console.'}
+                </div>
+              )}
+              {status === 'warning' && (
+                <div className="absolute inset-0 flex items-center justify-center text-yellow-200/80 text-center px-6">
+                  {diagnosticMessage}
                 </div>
               )}
 

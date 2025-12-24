@@ -32,7 +32,7 @@ const DevSection = () => {
   window.SupportCopilot.init({
     mount: document.getElementById('anchor-support'),
     tenantSlug: 'northwind',
-    apiBaseUrl: 'https://api.anchor.ai'
+    apiUrl: 'https://api.anchor.ai'
   });
 </script>`}</code>
           </pre>
