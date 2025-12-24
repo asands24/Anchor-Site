@@ -31,6 +31,7 @@ const DevSection = () => {
 <script>
   window.SupportCopilot.init({
     mount: document.getElementById('anchor-support'),
+    mode: 'embed',
     tenantSlug: 'northwind',
     apiUrl: 'https://api.anchor.ai'
   });

@@ -5,13 +5,16 @@ declare global {
   interface Window {
     SupportCopilot?: {
       init: (config: {
-        mount: string | HTMLElement;
         tenantSlug: string;
         apiUrl: string;
+        mount?: string | HTMLElement;
+        mode?: 'embed' | 'widget';
+        primaryColor?: string;
       }) => void;
       toggle?: () => void;
       open?: () => void;
       setInput?: (input: string) => void;
+      destroy?: () => void;
     };
   }
 }
@@ -24,12 +27,10 @@ const DEMO_QUESTIONS = [
 ];
 
 export const LiveDemo: React.FC = () => {
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error' | 'warning'>('loading');
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [diagnosticMessage, setDiagnosticMessage] = useState<string | null>(null);
-  const [widgetMounted, setWidgetMounted] = useState(false);
   const debugEnabled =
-    import.meta.env.DEV || new URLSearchParams(window.location.search).has('debug');
+    new URLSearchParams(window.location.search).get('debug') === '1';
 
   useEffect(() => {
     const initWidget = async () => {
@@ -38,89 +39,48 @@ export const LiveDemo: React.FC = () => {
       const tenantSlug = import.meta.env.VITE_DEMO_TENANT || 'demo';
 
       setErrorMessage(null);
-      setDiagnosticMessage(null);
-      setWidgetMounted(false);
 
       try {
         if (!widgetSrc) {
-          throw new Error('VITE_WIDGET_SRC is not set');
+          throw new Error('Missing VITE_WIDGET_SRC environment variable');
         }
 
         if (!apiUrl) {
-          throw new Error('VITE_API_BASE is not set');
+          throw new Error('Missing VITE_API_BASE environment variable');
         }
-
-        console.log('[Widget] Initializing with config:', { widgetSrc, apiUrl, tenantSlug });
-
-        // Get the actual DOM element instead of using a selector string
-        const mountElement = document.getElementById('support-copilot-mount');
-
-        if (!mountElement) {
-          throw new Error('Widget mount element not found in DOM');
-        }
-
-        console.log('[Widget] Mount element found:', mountElement);
 
         await loadScript(widgetSrc);
-        console.log('[Widget] Script loaded successfully');
 
         if (!window.SupportCopilot) {
-          throw new Error('SupportCopilot not found on window');
+          throw new Error('SupportCopilot not available after script load');
         }
 
-        console.log('[Widget] SupportCopilot object found on window');
-
-        try {
-          // Pass the actual DOM element to init
-          console.log('[Widget] Calling SupportCopilot.init with:', { mount: mountElement, tenantSlug, apiUrl });
-          window.SupportCopilot.init({
-            mount: mountElement,
-            tenantSlug,
-            apiUrl,
-          });
-          console.log('[Widget] SupportCopilot.init called successfully');
-        } catch (error) {
-          console.error('[Widget] SupportCopilot.init error:', error);
-          throw new Error(
-            `SupportCopilot.init failed: ${error instanceof Error ? error.message : 'Unknown error'}`
-          );
+        const mountElement = document.getElementById('support-copilot-mount');
+        if (!mountElement) {
+          throw new Error('Mount element #support-copilot-mount not found');
         }
+
+        window.SupportCopilot.init({
+          tenantSlug,
+          apiUrl,
+          mount: mountElement,
+          mode: 'embed',
+        });
 
         setStatus('ready');
-
-        setTimeout(() => {
-          const isEmpty = !mountElement.hasChildNodes();
-          console.log('[Widget] Checking mount element after 400ms:', {
-            isEmpty,
-            childNodes: mountElement.childNodes.length,
-            innerHTML: mountElement.innerHTML
-          });
-          if (isEmpty) {
-            setStatus('warning');
-            setDiagnosticMessage(
-              'Widget mounted but UI did not render. Check console/network logs, verify API endpoints, and confirm CORS settings.'
-            );
-          } else {
-            setWidgetMounted(true);
-            console.log('[Widget] Successfully mounted and rendered');
-          }
-        }, 400);
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Unknown error';
-        console.error('[Widget] Failed to load widget:', err);
+        const message = err instanceof Error ? err.message : 'Unknown error occurred';
         setErrorMessage(message);
         setStatus('error');
       }
     };
 
-    // Small timeout to allow hydration
-    const timer = setTimeout(initWidget, 1000);
-    return () => clearTimeout(timer);
+    initWidget();
   }, []);
 
   const handleQuestionClick = (question: string) => {
     if (window.SupportCopilot?.setInput) {
-      window.SupportCopilot.open?.(); // Ensure it's open
+      window.SupportCopilot.open?.();
       window.SupportCopilot.setInput(question);
     }
   };
@@ -134,9 +94,9 @@ export const LiveDemo: React.FC = () => {
         <p className="text-anchor-slate mb-12 max-w-2xl mx-auto">
           This is a live instance of the SupportCopilot widget connected to a public demo tenant.
           <br />
-          <span className="text-xs uppercase tracking-widest text-anchor-blue-500/70 border border-anchor-blue-500/30 px-2 py-1 rounded mt-2 inline-block">Public Tenant • Rate Limited • Logs Reset Daily</span>
-          <br />
-          <span className="text-xs text-red-300/80 mt-2 block"> Please do not enter sensitive or personal data.</span>
+          <span className="text-xs uppercase tracking-widest text-anchor-blue-500/70 border border-anchor-blue-500/30 px-2 py-1 rounded mt-2 inline-block">
+            Public demo tenant • Rate limited • No sensitive data
+          </span>
         </p>
 
         <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto items-stretch h-[600px]">
@@ -160,7 +120,13 @@ export const LiveDemo: React.FC = () => {
 
             <div className="flex-1 p-6 rounded-lg bg-anchor-blue-800/20 border border-anchor-blue-500/10 flex flex-col justify-center items-center text-center">
               <div
-                className={`w-3 h-3 rounded-full mb-2 ${status === 'ready' ? 'bg-green-500 animate-pulse' : status === 'warning' ? 'bg-yellow-500' : status === 'error' ? 'bg-red-500' : 'bg-yellow-500'}`}
+                className={`w-3 h-3 rounded-full mb-2 ${
+                  status === 'ready'
+                    ? 'bg-green-500 animate-pulse'
+                    : status === 'error'
+                    ? 'bg-red-500'
+                    : 'bg-yellow-500'
+                }`}
               />
               <p className="text-sm font-mono text-anchor-slate uppercase">
                 System Status: {status}
@@ -168,23 +134,17 @@ export const LiveDemo: React.FC = () => {
               {errorMessage && (
                 <p className="text-xs text-red-300 mt-3">{errorMessage}</p>
               )}
-              {diagnosticMessage && (
-                <p className="text-xs text-yellow-200/80 mt-3">
-                  {diagnosticMessage}
-                </p>
-              )}
             </div>
 
             {debugEnabled && (
               <div className="p-4 rounded-lg bg-anchor-blue-800/10 border border-anchor-blue-500/10 text-left text-xs text-anchor-slate space-y-2">
                 <div className="text-anchor-blue-200 uppercase tracking-widest text-[10px]">
-                  Debug panel
+                  Debug Panel
                 </div>
                 <div>widgetSrc: {import.meta.env.VITE_WIDGET_SRC || 'unset'}</div>
                 <div>apiUrl: {import.meta.env.VITE_API_BASE || 'unset'}</div>
                 <div>tenantSlug: {import.meta.env.VITE_DEMO_TENANT || 'demo'}</div>
-                <div>SupportCopilot: {window.SupportCopilot ? 'available' : 'missing'}</div>
-                <div>Mounted: {widgetMounted ? 'yes' : 'no'}</div>
+                <div>SupportCopilot: {window.SupportCopilot ? 'detected' : 'not detected'}</div>
               </div>
             )}
           </div>
@@ -202,22 +162,17 @@ export const LiveDemo: React.FC = () => {
 
             <div className="flex-1 relative bg-white/5">
               {status === 'loading' && (
-                <div className="absolute inset-0 flex items-center justify-center text-anchor-slate animate-pulse">
+                <div className="absolute inset-0 flex items-center justify-center text-anchor-slate animate-pulse z-10 pointer-events-none">
                   Initializing Widget...
                 </div>
               )}
               {status === 'error' && (
-                <div className="absolute inset-0 flex items-center justify-center text-red-400 text-center px-6">
+                <div className="absolute inset-0 flex items-center justify-center text-red-400 text-center px-6 z-10">
                   {errorMessage || 'Widget failed to load. Please check console.'}
                 </div>
               )}
-              {status === 'warning' && (
-                <div className="absolute inset-0 flex items-center justify-center text-yellow-200/80 text-center px-6">
-                  {diagnosticMessage}
-                </div>
-              )}
 
-              {/* The actual mount point */}
+              {/* Widget embed container */}
               <div id="support-copilot-mount" className="w-full h-full" />
 
             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CODE_EXAMPLE = '<script src="https://cdn.anchor.ai/widget.js"></script>\n<script>\n  SupportCopilot.init({\n    mount: "#support-copilot-mount",\n    tenantSlug: "demo",\n    apiUrl: "https://api.anchor.ai"\n  });\n</script>';
+const CODE_EXAMPLE = '<script src="https://cdn.anchor.ai/widget.js"></script>\n<script>\n  SupportCopilot.init({\n    mount: "#support-copilot-mount",\n    mode: "embed",\n    tenantSlug: "demo",\n    apiUrl: "https://api.anchor.ai"\n  });\n</script>';
 
 export const DeveloperSection: React.FC = () => {
     return (
