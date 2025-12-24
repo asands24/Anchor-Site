@@ -29,9 +29,11 @@ export const Home: React.FC = () => {
             const id = location.hash.replace('#', '');
             const element = document.getElementById(id);
             if (element) {
+                // Use longer delay for demo section to allow widget to initialize
+                const delay = id === 'demo' ? 300 : 100;
                 setTimeout(() => {
                     element.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                }, delay);
             }
         } else {
             window.scrollTo(0, 0);

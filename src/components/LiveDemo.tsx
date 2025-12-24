@@ -36,7 +36,6 @@ export const LiveDemo: React.FC = () => {
       const widgetSrc = import.meta.env.VITE_WIDGET_SRC;
       const apiUrl = import.meta.env.VITE_API_BASE;
       const tenantSlug = import.meta.env.VITE_DEMO_TENANT || 'demo';
-      const mount: string | HTMLElement = '#support-copilot-mount';
 
       setErrorMessage(null);
       setDiagnosticMessage(null);
@@ -51,19 +50,37 @@ export const LiveDemo: React.FC = () => {
           throw new Error('VITE_API_BASE is not set');
         }
 
+        console.log('[Widget] Initializing with config:', { widgetSrc, apiUrl, tenantSlug });
+
+        // Get the actual DOM element instead of using a selector string
+        const mountElement = document.getElementById('support-copilot-mount');
+
+        if (!mountElement) {
+          throw new Error('Widget mount element not found in DOM');
+        }
+
+        console.log('[Widget] Mount element found:', mountElement);
+
         await loadScript(widgetSrc);
+        console.log('[Widget] Script loaded successfully');
 
         if (!window.SupportCopilot) {
           throw new Error('SupportCopilot not found on window');
         }
 
+        console.log('[Widget] SupportCopilot object found on window');
+
         try {
+          // Pass the actual DOM element to init
+          console.log('[Widget] Calling SupportCopilot.init with:', { mount: mountElement, tenantSlug, apiUrl });
           window.SupportCopilot.init({
-            mount,
+            mount: mountElement,
             tenantSlug,
             apiUrl,
           });
+          console.log('[Widget] SupportCopilot.init called successfully');
         } catch (error) {
+          console.error('[Widget] SupportCopilot.init error:', error);
           throw new Error(
             `SupportCopilot.init failed: ${error instanceof Error ? error.message : 'Unknown error'}`
           );
@@ -71,15 +88,13 @@ export const LiveDemo: React.FC = () => {
 
         setStatus('ready');
 
-        const mountElement =
-          typeof mount === 'string' ? document.querySelector(mount) : mount;
-
-        if (!mountElement) {
-          throw new Error('Widget mount element not found');
-        }
-
         setTimeout(() => {
           const isEmpty = !mountElement.hasChildNodes();
+          console.log('[Widget] Checking mount element after 400ms:', {
+            isEmpty,
+            childNodes: mountElement.childNodes.length,
+            innerHTML: mountElement.innerHTML
+          });
           if (isEmpty) {
             setStatus('warning');
             setDiagnosticMessage(
@@ -87,11 +102,12 @@ export const LiveDemo: React.FC = () => {
             );
           } else {
             setWidgetMounted(true);
+            console.log('[Widget] Successfully mounted and rendered');
           }
         }, 400);
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Unknown error';
-        console.error('Failed to load widget:', err);
+        console.error('[Widget] Failed to load widget:', err);
         setErrorMessage(message);
         setStatus('error');
       }
