@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { loadScript } from '../lib/loadScript';
+import { normalizeApiUrl } from '../lib/normalizeApiUrl';
 
 declare global {
   interface Window {
@@ -62,7 +63,7 @@ export const LiveDemo: React.FC = () => {
 
         window.SupportCopilot.init({
           tenantSlug,
-          apiUrl,
+          apiUrl: normalizeApiUrl(apiUrl),
           mount: mountElement,
           mode: 'embed',
         });
