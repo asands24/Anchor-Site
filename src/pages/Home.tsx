@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { OceanShell } from '../components/OceanShell';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
@@ -14,6 +14,7 @@ import { useLocation } from 'react-router-dom';
 
 export const Home: React.FC = () => {
     const location = useLocation();
+    const isInitialMount = useRef(true);
 
     useEffect(() => {
         document.title = 'Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture';
@@ -24,19 +25,15 @@ export const Home: React.FC = () => {
             metaDescription.setAttribute('content', 'Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript.');
         }
 
-        // Handle hash navigation manually since we are using a Router now
-        if (location.hash) {
-            const id = location.hash.replace('#', '');
-            const element = document.getElementById(id);
-            if (element) {
-                // Use longer delay for demo section to allow widget to initialize
-                const delay = id === 'demo' ? 300 : 100;
-                setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }, delay);
+        // Only handle scroll on initial mount to prevent scroll jumps
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+
+            // On initial load, only scroll to top if there's no hash
+            // Hash navigation should only work when user explicitly clicks a link, not on page load
+            if (!location.hash) {
+                window.scrollTo(0, 0);
             }
-        } else {
-            window.scrollTo(0, 0);
         }
     }, [location]);
 
