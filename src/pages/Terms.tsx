@@ -3,7 +3,14 @@ import { LegalLayout } from '../components/LegalLayout';
 
 export const Terms: React.FC = () => {
     useEffect(() => {
-        document.title = 'Terms of Use | Anchor Reference Implementation';
+        document.title = 'Terms of Use | Anchor';
+
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Terms of use for Anchor AI support copilot demo. Review acceptable use, service nature, and liability information for our reference implementation.');
+        }
+
         window.scrollTo(0, 0);
     }, []);
 

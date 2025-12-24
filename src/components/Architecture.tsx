@@ -19,10 +19,10 @@ export const Architecture: React.FC = () => {
 
                         <ul className="space-y-4">
                             {[
-                                { name: 'Supabase', desc: 'PostgreSQL + pgvector + RLS' },
-                                { name: 'OpenAI', desc: 'LLM & Embeddings API' },
-                                { name: 'Netlify Functions', desc: 'Serverless backend logic' },
-                                { name: 'Typescript', desc: 'End-to-end type safety' },
+                                { name: 'Supabase', desc: 'PostgreSQL database with vector search & data security' },
+                                { name: 'OpenAI', desc: 'AI models & document embedding generation' },
+                                { name: 'Netlify Functions', desc: 'Serverless backend infrastructure' },
+                                { name: 'TypeScript', desc: 'Type-safe code across the entire stack' },
                             ].map((item) => (
                                 <li key={item.name} className="flex items-start gap-4">
                                     <div className="mt-1 w-5 h-5 rounded border border-anchor-blue-500/50 flex items-center justify-center">
@@ -72,8 +72,8 @@ export const Architecture: React.FC = () => {
                                     <span className="absolute top-2 left-3 text-xs text-green-500/70 uppercase tracking-wider">Supabase</span>
                                     <div className="text-white font-bold text-lg mb-2">PostgreSQL</div>
                                     <div className="flex justify-center gap-2 text-xs text-anchor-slate">
-                                        <span className="px-2 py-1 rounded bg-white/5">pgvector</span>
-                                        <span className="px-2 py-1 rounded bg-white/5">RLS Policies</span>
+                                        <span className="px-2 py-1 rounded bg-white/5">Vector Search</span>
+                                        <span className="px-2 py-1 rounded bg-white/5">Row Security</span>
                                         <span className="px-2 py-1 rounded bg-white/5">Auth</span>
                                     </div>
                                 </div>

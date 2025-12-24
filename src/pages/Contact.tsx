@@ -3,7 +3,14 @@ import { LegalLayout } from '../components/LegalLayout';
 
 export const Contact: React.FC = () => {
     useEffect(() => {
-        document.title = 'Contact | Anchor Reference Implementation';
+        document.title = 'Contact Us | Anchor - Request a Pilot Deployment';
+
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Request a dedicated pilot environment for Anchor AI support copilot. Contact our team about enterprise deployment, architecture questions, and implementation support.');
+        }
+
         window.scrollTo(0, 0);
     }, []);
 

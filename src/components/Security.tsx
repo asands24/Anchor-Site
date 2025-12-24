@@ -11,34 +11,34 @@ export const Security: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
-              <h3 className="text-xl font-bold text-white mb-3">Row-Level Security (RLS)</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Database-Level Data Isolation</h3>
               <p className="text-anchor-slate leading-relaxed">
-                Every query is scoped to the tenant ID at the database level.
-                Even if the application layer is compromised, one tenant cannot access another's data.
-                Enforced by PostgreSQL.
+                Every database query automatically filters by customer ID at the database level.
+                Even if your application is compromised, one customer cannot access another customer's data.
+                Enforced by PostgreSQL security policies.
               </p>
             </div>
 
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
-              <h3 className="text-xl font-bold text-white mb-3">Defense in Depth</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Layered Security Architecture</h3>
               <p className="text-anchor-slate leading-relaxed">
-                API keys are never exposed to the client. The widget communicates with a secure backend
-                intermediary (Netlify Functions) which handles authentication with 3rd party services (OpenAI, Supabase).
+                API keys and credentials are never exposed in browser code. The chat widget communicates with secure backend
+                services that handle all authentication with OpenAI and the database.
               </p>
             </div>
 
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
-              <h3 className="text-xl font-bold text-white mb-3">Key Separation</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Separated Access Credentials</h3>
               <p className="text-anchor-slate leading-relaxed">
-                Service roles are strictly used for ingestion and administrative tasks.
-                Public-facing interactions use scoped, low-privilege anonymous keys.
+                Administrative tools use privileged credentials for data management.
+                Public-facing widgets use restricted, low-permission access keys that limit potential damage.
               </p>
             </div>
 
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
-              <h3 className="text-xl font-bold text-white mb-3">Audit Logs</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Complete Activity Tracking</h3>
               <p className="text-anchor-slate leading-relaxed">
-                Every interaction is logged with correlation IDs, allowing for complete traceability across the stack.
+                Every interaction is logged with unique tracking identifiers, allowing you to trace any request through the entire system.
               </p>
             </div>
           </div>

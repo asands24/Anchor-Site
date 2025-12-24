@@ -19,13 +19,13 @@ export const Hero: React.FC = () => {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-8 leading-tight">
           Production-ready, multi-tenant <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-anchor-blue-500 to-blue-400">
-            RAG-powered support copilot
+            AI support copilot
           </span>
         </h1>
 
         <p className="text-anchor-slate text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          A definitive reference implementation for enterprise AI.
-          Featuring strict tenant isolation, embeddable widgets, and full admin observability.
+          A definitive reference implementation for enterprise AI support automation.
+          Built with document search, secure multi-customer architecture, embeddable chat widgets, and complete admin visibility.
           <br className="hidden md:block" />
           <span className="text-anchor-blue-500/80">Opinionated. Secure. Ready to deploy.</span>
         </p>

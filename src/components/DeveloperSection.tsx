@@ -46,7 +46,7 @@ export const DeveloperSection: React.FC = () => {
                         <span className="text-anchor-blue-500">Nothing they don't.</span>
                     </h2>
                     <p className="text-anchor-slate text-lg mb-8 leading-relaxed">
-                        Integration is literally copy-paste. We handle the complexity of React/Vue/Svelte/Angular interoperability by shipping a framework-agnostic IIFE.
+                        Integration is literally copy-paste. Works with React, Vue, Svelte, Angular, or plain HTML—just include one script file.
                     </p>
 
                     <div className="space-y-6">

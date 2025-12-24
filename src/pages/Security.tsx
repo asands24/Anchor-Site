@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 
 export const Security: React.FC = () => {
     useEffect(() => {
-        document.title = 'Security Overview | Anchor Reference Implementation';
+        document.title = 'Security Architecture | Anchor - Multi-Tenant Data Isolation';
+
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Learn about Anchor\'s security architecture: database-level data isolation, layered security, and key management for enterprise AI support systems.');
+        }
+
         window.scrollTo(0, 0);
     }, []);
 
@@ -19,19 +26,19 @@ export const Security: React.FC = () => {
                 Anchor implements defense-in-depth using three distinct layers of enforcement to prevent data leaks between tenants.
             </p>
 
-            <h3>1. Database Layer (PostgreSQL RLS)</h3>
+            <h3>1. Database Layer</h3>
             <p>
-                We rely on PostgreSQL Row Level Security (RLS) as the foundational barrier. Every query to the database is scoped to the authenticated user's tenant ID. Even if the application logic fails, the database policy prevents unauthorized access.
+                We use PostgreSQL Row Level Security as the foundational barrier. Every database query automatically filters to the authenticated user's customer ID. Even if the application code fails, the database security policies prevent unauthorized access.
             </p>
 
             <h3>2. Application Layer</h3>
             <p>
-                Our backend services and Edge Functions explicitly filter data retrieval and processing based on tenant context. This redundancy ensures that business logic aligns with data access policies.
+                Our backend services explicitly filter data retrieval and processing based on customer context. This redundancy ensures that business logic aligns with data access policies.
             </p>
 
             <h3>3. Frontend Layer</h3>
             <p>
-                The UI uses JSON Web Tokens (JWT) to scope all API requests. The frontend is aware of the user's tenant context and prevents rendering or requesting UI elements that belong to other tenants.
+                The user interface uses secure authentication tokens to scope all API requests. The frontend is aware of the user's customer context and prevents rendering or requesting data that belongs to other customers.
             </p>
 
             <h2>Key Management & Separation</h2>
@@ -56,7 +63,7 @@ export const Security: React.FC = () => {
                         <tr className="border-b border-anchor-slate/10 text-anchor-slate/80">
                             <td className="py-2 px-4 font-mono text-sm">SERVICE_ROLE_KEY</td>
                             <td className="py-2 px-4"><span className="inline-block px-2 py-1 rounded bg-red-900/40 text-red-300 text-xs font-bold">PRIVATE</span></td>
-                            <td className="py-2 px-4">Can bypass RLS. Must <strong>never</strong> be exposed to the client.</td>
+                            <td className="py-2 px-4">Can bypass security policies. Must <strong>never</strong> be exposed to the client.</td>
                         </tr>
                         <tr className="text-anchor-slate/80">
                             <td className="py-2 px-4 font-mono text-sm">OPENAI_API_KEY</td>

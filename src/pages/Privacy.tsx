@@ -3,7 +3,14 @@ import { LegalLayout } from '../components/LegalLayout';
 
 export const Privacy: React.FC = () => {
     useEffect(() => {
-        document.title = 'Privacy Policy | Anchor Reference Implementation';
+        document.title = 'Privacy Policy | Anchor';
+
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Privacy policy for Anchor AI support copilot demo. Learn how we collect, process, and protect your data in our reference implementation.');
+        }
+
         window.scrollTo(0, 0);
     }, []);
 

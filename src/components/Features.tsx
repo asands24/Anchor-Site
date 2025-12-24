@@ -2,33 +2,33 @@ import React from 'react';
 
 const FEATURE_LIST = [
   {
-    title: 'Multi-tenant RAG Support',
-    description: 'Strict tenant isolation at DB, app, and UI layers. Powered by pgvector and advanced embedding strategies for secure data retrieval.',
+    title: 'Secure Multi-Customer Architecture',
+    description: 'Complete data isolation for each customer at every layer—database, application, and UI. Built with PostgreSQL vector search to keep customer data completely separate.',
     icon: '🏢'
   },
   {
     title: 'Embeddable Chat Widget',
-    description: 'Single-file IIFE (widget.js) that can be dropped into any site. Initialized via a simple global `SupportCopilot.init(...)` call.',
+    description: 'Drop-in chat widget that works on any website. Install with a single script tag and configure with one line of code.',
     icon: '💬'
   },
   {
-    title: 'Admin Observability',
-    description: 'Comprehensive insights into LLM logs, retrieval performance, cost tracking, latency metrics, and request correlation IDs.',
+    title: 'Complete Admin Dashboard',
+    description: 'Monitor AI interactions, search performance, costs, response times, and track every request with detailed logs and metrics.',
     icon: '📊'
   },
   {
-    title: 'Ingestion CLI',
-    description: 'Robust CLI tool for URL crawling and text file ingestion, featuring smart chunking and automatic embedding generation.',
+    title: 'Document Ingestion Tools',
+    description: 'Command-line tools to import your documentation from websites or files. Automatically processes and optimizes content for AI search.',
     icon: '📥'
   },
   {
-    title: 'Streaming Responses',
-    description: 'Real-time token streaming for a responsive user experience, handling complex queries with immediate feedback.',
+    title: 'Real-Time Streaming',
+    description: 'Instant, word-by-word AI responses as they are generated. Users see answers appear immediately, not after long waits.',
     icon: '⚡'
   },
   {
-    title: 'Conversation Persistence',
-    description: 'Seamless history management backed by localStorage within the widget, allowing users to pick up right where they left off.',
+    title: 'Conversation History',
+    description: 'Automatically saves chat history in the user browser, so conversations continue seamlessly across sessions.',
     icon: '💾'
   }
 ];

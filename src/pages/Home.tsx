@@ -16,7 +16,13 @@ export const Home: React.FC = () => {
     const location = useLocation();
 
     useEffect(() => {
-        document.title = 'Anchor | Self-Hosted Agentic AI Architecture';
+        document.title = 'Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture';
+
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript.');
+        }
 
         // Handle hash navigation manually since we are using a Router now
         if (location.hash) {
