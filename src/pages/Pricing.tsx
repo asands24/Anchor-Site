@@ -60,12 +60,12 @@ export const Pricing: React.FC = () => {
               <div className="text-xs uppercase tracking-wider text-anchor-slate/70 font-semibold mb-4">
                 Secure Stripe checkout · One-time payment
               </div>
-              <div className="flex justify-center mt-6">
-                <StripeBuyButton
-                  buyButtonId="buy_btn_1SiF8ILhXfCYKUjG05KM0PGv"
-                  publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
-                />
-              </div>
+              <button
+                onClick={() => document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full py-3 rounded-md bg-anchor-blue-500 text-anchor-blue-900 font-bold hover:bg-anchor-blue-400 transition-all shadow-[0_0_15px_rgba(100,255,218,0.3)] hover:shadow-[0_0_25px_rgba(100,255,218,0.5)]"
+              >
+                Select Starter
+              </button>
             </div>
 
             <div className="bg-anchor-blue-700/30 border-2 border-anchor-blue-500 rounded-lg p-6 text-left relative shadow-[0_0_30px_rgba(100,255,218,0.2)]">
@@ -127,9 +127,22 @@ export const Pricing: React.FC = () => {
               </p>
             </div>
           </div>
+
+          <div id="checkout" className="max-w-3xl mx-auto mt-24 text-center">
+            <h2 className="text-3xl font-bold text-white mb-6">Ready to get started?</h2>
+            <div className="bg-anchor-blue-800/20 border border-anchor-blue-500/20 rounded-lg p-8 inline-block">
+              <p className="text-anchor-slate mb-6">
+                Complete your purchase securely via Stripe.
+              </p>
+              <StripeBuyButton
+                buyButtonId="buy_btn_1SiF8ILhXfCYKUjG05KM0PGv"
+                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+              />
+            </div>
+          </div>
         </div>
       </section>
       <Footer />
-    </OceanShell>
+    </OceanShell >
   );
 };
