@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
 import { LegalLayout } from '../components/LegalLayout';
+import { SEO } from '../components/SEO';
 
 export const Privacy: React.FC = () => {
     useEffect(() => {
-        document.title = 'Privacy Policy | Anchor';
-
-        // Update meta description
-        const metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', 'Privacy policy for Anchor AI support copilot demo. Learn how we collect, process, and protect your data in our reference implementation.');
-        }
-
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <LegalLayout title="Privacy Policy" lastUpdated={new Date().toLocaleDateString()}>
+            <SEO
+                title="Privacy Policy"
+                description="Privacy policy for Anchor AI support copilot demo. Learn how we collect, process, and protect your data in our reference implementation."
+                url="https://anchor-site.netlify.app/privacy"
+            />
             <p>
                 Anchor is a reference implementation for a self-hosted architecture.
                 This privacy policy applies to the public demo instance of Anchor available at this domain.

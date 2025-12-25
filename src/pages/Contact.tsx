@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
 import { LegalLayout } from '../components/LegalLayout';
+import { SEO } from '../components/SEO';
 
 export const Contact: React.FC = () => {
     useEffect(() => {
-        document.title = 'Contact Us | Anchor - Request a Pilot Deployment';
-
-        // Update meta description
-        const metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', 'Request a dedicated pilot environment for Anchor AI support copilot. Contact our team about enterprise deployment, architecture questions, and implementation support.');
-        }
-
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <LegalLayout title="Request a Pilot" lastUpdated={new Date().toLocaleDateString()}>
+            <SEO
+                title="Contact Us"
+                description="Request a dedicated pilot environment for Anchor AI support copilot. Contact our team about enterprise deployment, architecture questions, and implementation support."
+                url="https://anchor-site.netlify.app/contact"
+            />
             <p className="lead text-xl text-anchor-blue-100 mb-8">
                 Ready to evaluate Anchor for your organization? We can provision a dedicated environment for your team.
             </p>

@@ -1,22 +1,20 @@
 import React, { useEffect } from 'react';
 import { LegalLayout } from '../components/LegalLayout';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Security: React.FC = () => {
     useEffect(() => {
-        document.title = 'Security Architecture | Anchor - Multi-Tenant Data Isolation';
-
-        // Update meta description
-        const metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', 'Learn about Anchor\'s security architecture: database-level data isolation, layered security, and key management for enterprise AI support systems.');
-        }
-
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <LegalLayout title="Security Overview" lastUpdated={new Date().toLocaleDateString()}>
+            <SEO
+                title="Security Architecture"
+                description="Learn about Anchor's security architecture: database-level data isolation, layered security, and key management for enterprise AI support systems."
+                url="https://anchor-site.netlify.app/security"
+            />
             <p>
                 Security is a core design principle of the Anchor architecture. This page outlines the security model used in this reference implementation to ensure tenant isolation and data protection.
             </p>

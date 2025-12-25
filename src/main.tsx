@@ -4,8 +4,12 @@ import App from './App';
 import './index.css';
 import './lib/scrollDebug'; // Auto-enables if ?scrollDebug=1 in URL
 
+import { HelmetProvider } from 'react-helmet-async';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </React.StrictMode>
 );

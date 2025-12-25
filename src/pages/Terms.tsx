@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
 import { LegalLayout } from '../components/LegalLayout';
+import { SEO } from '../components/SEO';
 
 export const Terms: React.FC = () => {
     useEffect(() => {
-        document.title = 'Terms of Use | Anchor';
-
-        // Update meta description
-        const metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', 'Terms of use for Anchor AI support copilot demo. Review acceptable use, service nature, and liability information for our reference implementation.');
-        }
-
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <LegalLayout title="Terms of Use" lastUpdated={new Date().toLocaleDateString()}>
+            <SEO
+                title="Terms of Use"
+                description="Terms of use for Anchor AI support copilot demo. Review acceptable use, service nature, and liability information for our reference implementation."
+                url="https://anchor-site.netlify.app/terms"
+            />
             <p className="lead">
                 Welcome to the Anchor reference implementation demo. By accessing or using this website, you agree to be bound by these Terms of Use.
             </p>

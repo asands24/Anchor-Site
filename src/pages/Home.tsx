@@ -11,20 +11,13 @@ import { Security as SecuritySection } from '../components/Security'; // Renamed
 import { CTA } from '../components/CTA';
 import { Footer } from '../components/Footer';
 import { useLocation } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Home: React.FC = () => {
     const location = useLocation();
     const isInitialMount = useRef(true);
 
     useEffect(() => {
-        document.title = 'Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture';
-
-        // Update meta description
-        const metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', 'Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript.');
-        }
-
         // Only handle scroll on initial mount to prevent scroll jumps
         if (isInitialMount.current) {
             isInitialMount.current = false;
@@ -39,6 +32,11 @@ export const Home: React.FC = () => {
 
     return (
         <OceanShell>
+            <SEO
+                title="Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture"
+                description="Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript."
+                url="https://anchor-site.netlify.app/"
+            />
             <Navbar />
             <Hero />
             <TrustBar />
