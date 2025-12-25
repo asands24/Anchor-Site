@@ -120,14 +120,6 @@ export const CTA: React.FC = () => {
           >
             Get a Quote
           </a>
-          <a
-            href="https://github.com/asands24/Anchor"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 rounded-md border-2 border-anchor-blue-500/50 text-anchor-blue-400 font-bold hover:border-anchor-blue-500 hover:bg-anchor-blue-500/10 transition-all text-lg"
-          >
-            View on GitHub
-          </a>
         </div>
 
         <p className="text-sm text-anchor-slate mt-8">
