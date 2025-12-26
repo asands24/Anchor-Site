@@ -7,7 +7,7 @@ export const Pricing: React.FC = () => {
             {/* Background gradient similar to other sections if needed, or rely on OceanShell background */}
             <div className="container mx-auto px-6 relative z-10">
                 <div className="max-w-3xl mx-auto text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Pricing</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Ready to drop anchor?</h2>
                     <p className="text-lg text-anchor-slate">
                         Choose the Anchor license that fits your rollout, with optional support once you are live.
                     </p>
@@ -59,7 +59,7 @@ export const Pricing: React.FC = () => {
                             PRO
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
-                        <p className="text-anchor-blue-300 text-sm mb-4">License + Setup</p>
+                        <p className="text-anchor-blue-300 text-sm mb-4">License + setup · You own the code</p>
                         <div className="text-3xl font-bold text-anchor-blue-400 mb-4">
                             $6,000
                             <span className="text-sm text-anchor-slate font-normal block">one-time</span>
@@ -78,6 +78,9 @@ export const Pricing: React.FC = () => {
                                 Deployment checklist
                             </li>
                         </ul>
+                        <div className="text-xs uppercase tracking-wider text-anchor-slate/70 font-semibold mb-3">
+                            Secure Stripe checkout
+                        </div>
                         <StripeBuyButton
                             buyButtonId="buy_btn_1SiRztLhXfCYKUjGXjAwZ8dz"
                             publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
@@ -108,19 +111,6 @@ export const Pricing: React.FC = () => {
                         <p className="text-xs text-anchor-slate italic">
                             Available after purchase
                         </p>
-                    </div>
-                </div>
-
-                <div id="checkout" className="max-w-3xl mx-auto mt-24 text-center">
-                    <h2 className="text-3xl font-bold text-white mb-6">Ready to get started?</h2>
-                    <div className="bg-anchor-blue-800/20 border border-anchor-blue-500/20 rounded-lg p-8 inline-block">
-                        <p className="text-anchor-slate mb-6">
-                            Complete your purchase securely via Stripe.
-                        </p>
-                        <StripeBuyButton
-                            buyButtonId="buy_btn_1SiF8ILhXfCYKUjG05KM0PGv"
-                            publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
-                        />
                     </div>
                 </div>
             </div>
