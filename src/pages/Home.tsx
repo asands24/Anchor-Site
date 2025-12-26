@@ -9,6 +9,7 @@ import { DeveloperSection } from '../components/DeveloperSection';
 import { LiveDemo } from '../components/LiveDemo';
 import { Security as SecuritySection } from '../components/Security'; // Renamed to avoid confusion with the page
 import { CTA } from '../components/CTA';
+import { Pricing } from '../components/Pricing';
 import { Footer } from '../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { SEO } from '../components/SEO';
@@ -45,6 +46,7 @@ export const Home: React.FC = () => {
             <DeveloperSection />
             <LiveDemo />
             <SecuritySection />
+            <Pricing />
             <CTA />
             <Footer />
         </OceanShell>

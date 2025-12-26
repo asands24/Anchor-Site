@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center gap-8">
           <button onClick={() => handleNavigation('features')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Features</button>
           <button onClick={() => handleNavigation('architecture')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Architecture</button>
-          <button onClick={() => navigate('/pricing')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Pricing</button>
+          <button onClick={() => handleNavigation('pricing')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Pricing</button>
           <button onClick={() => handleNavigation('developers')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Developers</button>
           <button
             onClick={() => handleNavigation('demo')}
