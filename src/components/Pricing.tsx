@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StripeBuyButton } from './billing/StripeBuyButton';
 
 export const Pricing: React.FC = () => {
+    const [showStarterCheckout, setShowStarterCheckout] = useState(false);
+    const [showSupportCheckout, setShowSupportCheckout] = useState(false);
+
     return (
         <section id="pricing" className="py-24 relative overflow-hidden">
             {/* Background gradient similar to other sections if needed, or rely on OceanShell background */}
@@ -43,15 +46,22 @@ export const Pricing: React.FC = () => {
                                 Admin + logs
                             </li>
                         </ul>
-                        <div className="text-xs uppercase tracking-wider text-anchor-slate/70 font-semibold mb-4">
+                        <div className="text-xs uppercase tracking-wider text-anchor-slate/70 font-semibold mb-3">
                             Secure Stripe checkout · One-time payment
                         </div>
-                        <button
-                            onClick={() => document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="w-full py-3 rounded-md bg-anchor-blue-500 text-anchor-blue-900 font-bold hover:bg-anchor-blue-400 transition-all shadow-[0_0_15px_rgba(100,255,218,0.3)] hover:shadow-[0_0_25px_rgba(100,255,218,0.5)]"
-                        >
-                            Select Starter
-                        </button>
+                        {!showStarterCheckout ? (
+                            <button
+                                onClick={() => setShowStarterCheckout(true)}
+                                className="w-full py-3 rounded-md bg-anchor-blue-500 text-anchor-blue-900 font-bold hover:bg-anchor-blue-400 transition-all shadow-[0_0_15px_rgba(100,255,218,0.3)] hover:shadow-[0_0_25px_rgba(100,255,218,0.5)]"
+                            >
+                                Select Starter
+                            </button>
+                        ) : (
+                            <StripeBuyButton
+                                buyButtonId="buy_btn_1SiF8ILhXfCYKUjG05KM0PGv"
+                                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                            />
+                        )}
                     </div>
 
                     <div className="bg-anchor-blue-700/30 border-2 border-anchor-blue-500 rounded-lg p-6 text-left relative shadow-[0_0_30px_rgba(100,255,218,0.2)]">
@@ -108,9 +118,22 @@ export const Pricing: React.FC = () => {
                                 Upgrade guidance
                             </li>
                         </ul>
-                        <p className="text-xs text-anchor-slate italic">
-                            Available after purchase
-                        </p>
+                        <div className="text-xs uppercase tracking-wider text-anchor-slate/70 font-semibold mb-3">
+                            Secure Stripe checkout · Monthly
+                        </div>
+                        {!showSupportCheckout ? (
+                            <button
+                                onClick={() => setShowSupportCheckout(true)}
+                                className="w-full py-3 rounded-md bg-anchor-blue-600/30 border border-anchor-blue-500/40 text-anchor-blue-400 font-bold hover:bg-anchor-blue-600/50 hover:border-anchor-blue-500/60 transition-all"
+                            >
+                                Subscribe to Support
+                            </button>
+                        ) : (
+                            <StripeBuyButton
+                                buyButtonId="buy_btn_1SifyWLhXfCYKUjG6c1R4NR1"
+                                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
