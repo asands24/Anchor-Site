@@ -5,8 +5,12 @@ import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { Security } from './pages/Security';
 import { Contact } from './pages/Contact';
+import { EasterEgg } from './components/EasterEgg';
+import { useCommandKEasterEgg } from './lib/useCommandKEasterEgg';
 
 function App() {
+  const easterEggActivated = useCommandKEasterEgg();
+
   useEffect(() => {
     // Disable automatic scroll restoration to prevent browser-induced scroll jumps
     if ('scrollRestoration' in window.history) {
@@ -16,6 +20,7 @@ function App() {
 
   return (
     <Router>
+      <EasterEgg isActive={easterEggActivated} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<Privacy />} />

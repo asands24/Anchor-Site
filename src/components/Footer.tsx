@@ -24,6 +24,12 @@ export const Footer: React.FC = () => {
           <Link to="/security" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Security</Link>
         </div>
       </div>
+
+      <div className="container mx-auto px-6 pb-4">
+        <div className="text-center text-[10px] text-anchor-slate/10 hover:text-anchor-slate/30 transition-all duration-500 cursor-default select-none">
+          press ⌘K three times to reveal the depths
+        </div>
+      </div>
     </footer>
   );
 };
