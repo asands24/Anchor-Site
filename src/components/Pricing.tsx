@@ -78,13 +78,10 @@ export const Pricing: React.FC = () => {
                                 Deployment checklist
                             </li>
                         </ul>
-                        <a
-                            href="mailto:support@anchor.ai?subject=Anchor%20Pro%20Invoice"
-                            className="inline-flex items-center justify-center w-full px-5 py-3 rounded-md border border-anchor-blue-500 text-anchor-blue-200 hover:bg-anchor-blue-500/10 transition-colors text-sm font-semibold"
-                        >
-                            Contact sales
-                        </a>
-                        {/* To add Pro checkout later, render <StripeBuyButton buyButtonId="" publishableKey="" /> here. */}
+                        <StripeBuyButton
+                            buyButtonId="buy_btn_1SiRztLhXfCYKUjGXjAwZ8dz"
+                            publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                        />
                     </div>
 
                     <div className="bg-anchor-blue-800/20 border border-anchor-blue-500/20 rounded-lg p-6 text-left hover:border-anchor-blue-500/40 transition-all">
