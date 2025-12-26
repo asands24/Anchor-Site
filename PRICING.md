@@ -126,6 +126,18 @@ For **Enterprise customers**, we can assist with:
 
 ---
 
+## Technical Requirements
+
+### Stripe Buy Button & CSP
+The pricing page uses Stripe Buy Buttons for checkout. This requires:
+- **Script Source:** `https://js.stripe.com/v3/buy-button.js` must be loaded and not blocked by Content Security Policy (CSP) or ad blockers
+- **CSP Configuration:** If you deploy with a strict CSP, ensure it allows `script-src` from `https://js.stripe.com`
+- **Third-Party Scripts:** Ad blockers or privacy extensions may block Stripe scripts in development; test in an incognito/private window if the button doesn't appear
+
+The Stripe Buy Button custom element is loaded globally in the site's `index.html` to ensure availability across all routes.
+
+---
+
 ## Ready to get started?
 
 1. **Schedule a demo** – [Contact us](mailto:support@anchor.ai) to see Anchor in action.
