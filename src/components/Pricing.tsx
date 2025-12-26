@@ -3,6 +3,7 @@ import { StripeBuyButton } from './billing/StripeBuyButton';
 
 export const Pricing: React.FC = () => {
     const [showStarterCheckout, setShowStarterCheckout] = useState(false);
+    const [showProCheckout, setShowProCheckout] = useState(false);
     const [showSupportCheckout, setShowSupportCheckout] = useState(false);
 
     return (
@@ -91,10 +92,19 @@ export const Pricing: React.FC = () => {
                         <div className="text-xs uppercase tracking-wider text-anchor-slate/70 font-semibold mb-3">
                             Secure Stripe checkout
                         </div>
-                        <StripeBuyButton
-                            buyButtonId="buy_btn_1SiRztLhXfCYKUjGXjAwZ8dz"
-                            publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
-                        />
+                        {!showProCheckout ? (
+                            <button
+                                onClick={() => setShowProCheckout(true)}
+                                className="w-full py-3 rounded-md bg-anchor-blue-500 text-anchor-blue-900 font-bold hover:bg-anchor-blue-400 transition-all shadow-[0_0_15px_rgba(100,255,218,0.3)] hover:shadow-[0_0_25px_rgba(100,255,218,0.5)]"
+                            >
+                                Select Pro
+                            </button>
+                        ) : (
+                            <StripeBuyButton
+                                buyButtonId="buy_btn_1SiRztLhXfCYKUjGXjAwZ8dz"
+                                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                            />
+                        )}
                     </div>
 
                     <div className="bg-anchor-blue-800/20 border border-anchor-blue-500/20 rounded-lg p-6 text-left hover:border-anchor-blue-500/40 transition-all">
