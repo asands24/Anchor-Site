@@ -5,6 +5,7 @@ import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { Security } from './pages/Security';
 import { Contact } from './pages/Contact';
+import { KnowledgeBase } from './pages/KnowledgeBase';
 import { EasterEgg } from './components/EasterEgg';
 import { useCommandKEasterEgg } from './lib/useCommandKEasterEgg';
 
@@ -27,6 +28,8 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/security" element={<Security />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/knowledge" element={<KnowledgeBase />} />
+        <Route path="/knowledge/:slug" element={<KnowledgeBase />} />
       </Routes>
     </Router>
   );

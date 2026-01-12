@@ -45,6 +45,7 @@ export const Navbar: React.FC = () => {
           <button onClick={() => handleNavigation('features')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Features</button>
           <button onClick={() => handleNavigation('architecture')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Architecture</button>
           <button onClick={() => handleNavigation('pricing')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Pricing</button>
+          <button onClick={() => navigate('/knowledge')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Docs</button>
           <button onClick={() => handleNavigation('developers')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Developers</button>
           <button
             onClick={() => handleNavigation('demo')}

@@ -32,7 +32,40 @@ export default {
           '50%': { opacity: '0.7' },
         },
       },
+      typography: (theme: any) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.anchor.slate'),
+            h1: {
+              color: theme('colors.anchor.white'),
+            },
+            h2: {
+              color: theme('colors.anchor.white'),
+            },
+            h3: {
+              color: theme('colors.anchor.white'),
+            },
+            h4: {
+              color: theme('colors.anchor.white'),
+            },
+            strong: {
+              color: theme('colors.anchor.white'),
+            },
+            code: {
+              color: theme('colors.anchor.500'),
+            },
+            a: {
+              color: theme('colors.anchor.500'),
+              '&:hover': {
+                color: theme('colors.anchor.white'),
+              },
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;

@@ -57,6 +57,7 @@ Anchor is a **commercial software license** for a production-ready AI support co
 - **Konami Code**: Entering `↑ ↑ ↓ ↓ ← → ← → B A` toggles "Deep Dive Mode".
 - **Live Demo**: Integrates with the production widget script.
 - **Architecture Visualization**: Explains the RAG stack clearly.
+- **Knowledge Base**: Enterprise-ready documentation center (`/knowledge`) powered by Markdown files, `react-markdown`, and Tailwind Typography.
 
 ## Environment Variables
 
@@ -74,6 +75,13 @@ VITE_DEMO_TENANT="demo"
 npm install
 npm run dev
 \`\`\`
+
+## Managing Knowledge Base
+
+Content is located in `src/content/knowledge/*.md`.
+1. Create a new markdown file in that directory.
+2. Import it in `src/pages/KnowledgeBase.tsx`.
+3. Add it to the `contentMap` and `navigation` array in `KnowledgeBase.tsx`.
 
 ## Deploy (Netlify)
 
