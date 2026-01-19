@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://anchor-site.netlify.app/</loc>
+    <loc>https://anchor-widget.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://anchor-site.netlify.app/features</loc>
+    <loc>https://anchor-widget.com/features</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
    <url>
-    <loc>https://anchor-site.netlify.app/architecture</loc>
+    <loc>https://anchor-widget.com/architecture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://anchor-site.netlify.app/privacy</loc>
+    <loc>https://anchor-widget.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://anchor-site.netlify.app/terms</loc>
+    <loc>https://anchor-widget.com/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
    <url>
-    <loc>https://anchor-site.netlify.app/security</loc>
+    <loc>https://anchor-widget.com/security</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
    <url>
-    <loc>https://anchor-site.netlify.app/contact</loc>
+    <loc>https://anchor-widget.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

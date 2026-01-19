@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anchor-site.netlify.app/sitemap.xml
+Sitemap: https://anchor-widget.com/sitemap.xml
