@@ -12,7 +12,7 @@ export const Contact: React.FC = () => {
             <SEO
                 title="Contact Us"
                 description="Request a dedicated pilot environment for Anchor AI support copilot. Contact our team about enterprise deployment, architecture questions, and implementation support."
-                url="https://anchor-site.netlify.app/contact"
+                url="https://anchor-widget.com/contact"
             />
             <p className="lead text-xl text-anchor-blue-100 mb-8">
                 Ready to evaluate Anchor for your organization? We can provision a dedicated environment for your team.

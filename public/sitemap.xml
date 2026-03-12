@@ -6,12 +6,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://anchor-widget.com/features</loc>
+    <loc>https://anchor-widget.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-   <url>
-    <loc>https://anchor-widget.com/architecture</loc>
+  <url>
+    <loc>https://anchor-widget.com/security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -25,14 +25,39 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-   <url>
-    <loc>https://anchor-widget.com/security</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-   <url>
-    <loc>https://anchor-widget.com/contact</loc>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/overview</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/how-it-works</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/deployment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/integrations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/security</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/customization</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://anchor-widget.com/knowledge/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

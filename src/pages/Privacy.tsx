@@ -12,7 +12,7 @@ export const Privacy: React.FC = () => {
             <SEO
                 title="Privacy Policy"
                 description="Privacy policy for Anchor AI support copilot demo. Learn how we collect, process, and protect your data in our reference implementation."
-                url="https://anchor-site.netlify.app/privacy"
+                url="https://anchor-widget.com/privacy"
             />
             <p>
                 Anchor is a reference implementation for a self-hosted architecture.

@@ -35,7 +35,7 @@ export const Home: React.FC = () => {
             <SEO
                 title="Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture"
                 description="Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript."
-                url="https://anchor-site.netlify.app/"
+                url="https://anchor-widget.com/"
             />
             <Navbar />
             <Hero />

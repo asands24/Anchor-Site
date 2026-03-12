@@ -12,7 +12,7 @@ export const Terms: React.FC = () => {
             <SEO
                 title="Terms of Use"
                 description="Terms of use for Anchor AI support copilot demo. Review acceptable use, service nature, and liability information for our reference implementation."
-                url="https://anchor-site.netlify.app/terms"
+                url="https://anchor-widget.com/terms"
             />
             <p className="lead">
                 Welcome to the Anchor reference implementation demo. By accessing or using this website, you agree to be bound by these Terms of Use.
