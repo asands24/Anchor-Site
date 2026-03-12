@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { DEFAULT_OG_IMAGE_PATH, SITE_NAME, SITE_URL, toAbsoluteUrl } from '../lib/seo';
 
 interface SEOProps {
     title: string;
@@ -13,33 +14,35 @@ interface SEOProps {
 export const SEO: React.FC<SEOProps> = ({
     title,
     description,
-    name = 'Anchor',
+    name = SITE_NAME,
     type = 'website',
-    url = 'https://anchor-site.netlify.app',
-    image = '/og-image.svg'
+    url = SITE_URL,
+    image = DEFAULT_OG_IMAGE_PATH
 }) => {
-    const fullTitle = title.includes('Anchor') ? title : `${title} | Anchor`;
+    const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+    const canonicalUrl = toAbsoluteUrl(url);
+    const imageUrl = toAbsoluteUrl(image);
 
     return (
         <Helmet>
-            {/* Standard metadata tags */}
             <title>{fullTitle}</title>
             <meta name='description' content={description} />
-            <link rel="canonical" href={url} />
+            <meta name="robots" content="index,follow,max-image-preview:large" />
+            <link rel="canonical" href={canonicalUrl} />
 
-            {/* Facebook tags */}
             <meta property="og:type" content={type} />
-            <meta property="og:title" content={title} />
+            <meta property="og:site_name" content={SITE_NAME} />
+            <meta property="og:title" content={fullTitle} />
             <meta property="og:description" content={description} />
-            <meta property="og:image" content={image} />
-            <meta property="og:url" content={url} />
+            <meta property="og:image" content={imageUrl} />
+            <meta property="og:image:alt" content={`${SITE_NAME} product overview`} />
+            <meta property="og:url" content={canonicalUrl} />
 
-            {/* Twitter tags */}
             <meta name="twitter:creator" content={name} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={title} />
+            <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={image} />
+            <meta name="twitter:image" content={imageUrl} />
         </Helmet>
     );
 };

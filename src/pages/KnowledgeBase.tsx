@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { Helmet } from 'react-helmet-async';
+import { SEO } from '../components/SEO';
 import { ChevronRight, BookOpen, Shield, Code, Server, HelpCircle, FileText, Settings } from 'lucide-react';
 
 // Import markdown content
@@ -58,13 +58,15 @@ export function KnowledgeBase() {
     }, [slug, navigate]);
 
     const currentSection = navigation.find(n => n.slug === slug)?.name || 'Docs';
+    const canonicalPath = slug ? `/knowledge/${slug}` : '/knowledge/overview';
 
     return (
         <div className="min-h-screen flex flex-col bg-anchor-blue-900 text-anchor-white font-sans selection:bg-anchor-blue-500 selection:text-anchor-blue-900">
-            <Helmet>
-                <title>{currentSection} - Anchor Knowledge Base</title>
-                <meta name="description" content={`Anchor Knowledge Base: ${currentSection}`} />
-            </Helmet>
+            <SEO
+                title={`${currentSection} - Anchor Knowledge Base`}
+                description={`Anchor Knowledge Base documentation for ${currentSection}. Learn how to deploy, secure, and customize Anchor.`}
+                url={canonicalPath}
+            />
 
             <Navbar />
 

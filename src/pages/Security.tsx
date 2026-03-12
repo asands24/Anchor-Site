@@ -13,7 +13,7 @@ export const Security: React.FC = () => {
             <SEO
                 title="Security Architecture"
                 description="Learn about Anchor's security architecture: database-level data isolation, layered security, and key management for enterprise AI support systems."
-                url="https://anchor-site.netlify.app/security"
+                url="https://anchor-widget.com/security"
             />
             <p>
                 Security is a core design principle of the Anchor architecture. This page outlines the security model used in this reference implementation to ensure tenant isolation and data protection.

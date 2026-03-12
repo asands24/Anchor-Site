@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#06152c" />
     <link rel="canonical" href="https://anchor-widget.com/" />
 
     <!-- Primary Meta Tags -->
@@ -11,7 +12,7 @@
     <meta name="title" content="Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture" />
     <meta name="description" content="Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript." />
     <meta name="keywords" content="AI support copilot, enterprise AI, multi-tenant architecture, customer support automation, RAG implementation, vector search, PostgreSQL AI, embeddable chat widget, AI observability" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -34,28 +35,42 @@
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Anchor",
-      "applicationCategory": "BusinessApplication",
-      "description": "Enterprise AI support copilot with secure multi-customer architecture, document search, and embeddable chat widgets.",
-      "url": "https://anchor-widget.com/",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "Secure multi-customer data isolation",
-        "AI-powered document search",
-        "Embeddable chat widgets",
-        "Admin dashboard and observability",
-        "Real-time streaming responses",
-        "Complete activity tracking"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Anchor",
+            "url": "https://anchor-widget.com/"
+          },
+          {
+            "@type": "WebSite",
+            "name": "Anchor",
+            "url": "https://anchor-widget.com/"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Anchor",
+            "applicationCategory": "BusinessApplication",
+            "description": "Enterprise AI support copilot with secure multi-customer architecture, document search, and embeddable chat widgets.",
+            "url": "https://anchor-widget.com/",
+            "operatingSystem": "Web",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "featureList": [
+              "Secure multi-customer data isolation",
+              "AI-powered document search",
+              "Embeddable chat widgets",
+              "Admin dashboard and observability",
+              "Real-time streaming responses",
+              "Complete activity tracking"
+            ]
+          }
+        ]
+      }
     </script>
   </head>
   <body class="bg-anchor-blue-900 text-anchor-white">
