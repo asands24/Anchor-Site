@@ -40,17 +40,17 @@ export const Contact: React.FC = () => {
                     <div className="space-y-6">
                         <div>
                             <div className="text-xs uppercase tracking-wider text-anchor-slate/50 font-bold mb-1">Email</div>
-                            <a href="mailto:hello@example.com" className="text-xl text-anchor-blue-300 hover:text-white transition-colors font-medium flex items-center gap-2">
-                                <span>hello@example.com</span>
+                            <a href="mailto:alex@asandstech.com" className="text-xl text-anchor-blue-300 hover:text-white transition-colors font-medium flex items-center gap-2">
+                                <span>alex@asandstech.com</span>
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                             </a>
                         </div>
 
                         <div>
-                            <div className="text-xs uppercase tracking-wider text-anchor-slate/50 font-bold mb-1">GitHub</div>
-                            <a href="https://github.com/example/anchor" target="_blank" rel="noopener noreferrer" className="text-lg text-anchor-slate/80 hover:text-white transition-colors">
-                                github.com/example/anchor
-                            </a>
+                            <div className="text-xs uppercase tracking-wider text-anchor-slate/50 font-bold mb-1">Source Code</div>
+                            <p className="text-sm text-anchor-blue-100">
+                                Source code is delivered as a private GitHub repository invite after purchase.
+                            </p>
                         </div>
                     </div>
 

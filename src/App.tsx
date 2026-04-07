@@ -1,13 +1,30 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { Security } from './pages/Security';
 import { Contact } from './pages/Contact';
 import { KnowledgeBase } from './pages/KnowledgeBase';
+import { NotFound } from './pages/NotFound';
 import { EasterEgg } from './components/EasterEgg';
 import { useCommandKEasterEgg } from './lib/useCommandKEasterEgg';
+
+function ScrollHandler() {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [hash]);
+  return null;
+}
 
 function App() {
   const easterEggActivated = useCommandKEasterEgg();
@@ -21,6 +38,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollHandler />
       <EasterEgg isActive={easterEggActivated} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,6 +48,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/knowledge" element={<KnowledgeBase />} />
         <Route path="/knowledge/:slug" element={<KnowledgeBase />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

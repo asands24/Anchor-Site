@@ -31,6 +31,7 @@ export const LiveDemo: React.FC = () => {
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const debugEnabled =
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
     new URLSearchParams(window.location.search).get('debug') === '1';
 
   useEffect(() => {
@@ -76,7 +77,21 @@ export const LiveDemo: React.FC = () => {
       }
     };
 
-    initWidget();
+    const el = document.getElementById('demo');
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          initWidget();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const handleQuestionClick = (question: string) => {

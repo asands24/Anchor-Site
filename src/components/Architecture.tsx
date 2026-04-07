@@ -82,7 +82,7 @@ export const Architecture: React.FC = () => {
                         </div>
 
                         <div className="mt-4 text-center">
-                            <span className="text-xs text-anchor-slate opactiy-50 font-mono">
+                            <span className="text-xs text-anchor-slate opacity-50 font-mono">
                                 Also connects to OpenAI for Embeddings & Chat Completion
                             </span>
                         </div>

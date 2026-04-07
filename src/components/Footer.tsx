@@ -7,9 +7,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full border-2 border-anchor-slate/30 flex items-center justify-center text-anchor-slate/50 font-bold text-xs">
-            A
-          </div>
+          <img src="/logo.png" alt="Anchor Logo" className="w-6 h-6 object-contain opacity-50" />
           <span className="text-anchor-slate/50 font-medium">Anchor</span>
         </div>
 
@@ -19,7 +17,7 @@ export const Footer: React.FC = () => {
 
         <div className="flex gap-6 text-sm">
           <Link to="/knowledge" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Docs</Link>
-          <Link to="/pricing" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Pricing</Link>
+          <Link to="/#pricing" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Pricing</Link>
           <Link to="/privacy" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Privacy</Link>
           <Link to="/terms" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Terms</Link>
           <Link to="/security" className="text-anchor-slate/50 hover:text-anchor-blue-500 transition-colors">Security</Link>

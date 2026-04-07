@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { loadScript } from '../../lib/loadScript';
 
 interface StripeBuyButtonProps {
   buyButtonId: string;
@@ -14,6 +15,9 @@ export const StripeBuyButton: React.FC<StripeBuyButtonProps> = ({
   const maxCheckAttempts = 30; // 3 seconds at 100ms intervals
 
   useEffect(() => {
+    // Load Stripe buy-button script
+    loadScript('https://js.stripe.com/v3/buy-button.js');
+
     // Log when component mounts
     console.log('[StripeBuyButton] Component mounted, checking for custom element registration');
 

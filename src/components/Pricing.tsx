@@ -59,8 +59,8 @@ export const Pricing: React.FC = () => {
                             </button>
                         ) : (
                             <StripeBuyButton
-                                buyButtonId="buy_btn_1SiF8ILhXfCYKUjG05KM0PGv"
-                                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                                buyButtonId={import.meta.env.VITE_STRIPE_BUY_BTN_STARTER}
+                                publishableKey={import.meta.env.VITE_STRIPE_KEY_STARTER}
                             />
                         )}
                     </div>
@@ -101,8 +101,8 @@ export const Pricing: React.FC = () => {
                             </button>
                         ) : (
                             <StripeBuyButton
-                                buyButtonId="buy_btn_1SiRztLhXfCYKUjGXjAwZ8dz"
-                                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                                buyButtonId={import.meta.env.VITE_STRIPE_BUY_BTN_PRO}
+                                publishableKey={import.meta.env.VITE_STRIPE_KEY_PRO}
                             />
                         )}
                     </div>
@@ -140,8 +140,8 @@ export const Pricing: React.FC = () => {
                             </button>
                         ) : (
                             <StripeBuyButton
-                                buyButtonId="buy_btn_1SifyWLhXfCYKUjG6c1R4NR1"
-                                publishableKey="pk_live_51SEMaSLhXfCYKUjGviRI3uGsT77f9hId1YosRqLFn6Fd3FP9oXWpw1EtJQWvreozA5D9GwvIsinhZJwLEVWO1F1J00gUW1whL2"
+                                buyButtonId={import.meta.env.VITE_STRIPE_BUY_BTN_SUPPORT}
+                                publishableKey={import.meta.env.VITE_STRIPE_KEY_SUPPORT}
                             />
                         )}
                     </div>
