@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { OceanShell } from '../components/OceanShell';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
-import { TrustBar } from '../components/TrustBar';
 import { Features } from '../components/Features';
-import { Architecture } from '../components/Architecture';
-import { DeveloperSection } from '../components/DeveloperSection';
 import { LiveDemo } from '../components/LiveDemo';
-import { Security as SecuritySection } from '../components/Security'; // Renamed to avoid confusion with the page
 import { Pricing } from '../components/Pricing';
+import { HowItWorks } from '../components/HowItWorks';
+import { WhyAnchor } from '../components/WhyAnchor';
+import { FAQ } from '../components/FAQ';
+import { FinalCTA } from '../components/FinalCTA';
 import { Footer } from '../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { SEO } from '../components/SEO';
@@ -33,19 +33,19 @@ export const Home: React.FC = () => {
     return (
         <OceanShell>
             <SEO
-                title="Anchor | Enterprise AI Support Copilot - Multi-Tenant Architecture"
-                description="Production-ready AI support copilot with secure multi-customer architecture, embeddable chat widgets, and complete admin observability. Built on PostgreSQL, OpenAI, and TypeScript."
+                title="Anchor | AI assistant that answers your customers 24/7"
+                description="Anchor adds an AI assistant to your small-business website that answers from your own FAQ, services and policies. Set up for you in 3 business days, from $199/month."
                 url="https://anchor-widget.com/"
             />
             <Navbar />
             <Hero />
-            <TrustBar />
-            <Features />
-            <Architecture />
-            <DeveloperSection />
+            <HowItWorks />
             <LiveDemo />
-            <SecuritySection />
+            <Features />
+            <WhyAnchor />
             <Pricing />
+            <FAQ />
+            <FinalCTA />
             <Footer />
         </OceanShell>
     );

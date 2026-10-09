@@ -6,8 +6,6 @@ import { Terms } from './pages/Terms';
 import { Security } from './pages/Security';
 import { Contact } from './pages/Contact';
 import { NotFound } from './pages/NotFound';
-import { EasterEgg } from './components/EasterEgg';
-import { useCommandKEasterEgg } from './lib/useCommandKEasterEgg';
 
 const KnowledgeBase = lazy(() => import('./pages/KnowledgeBase').then(module => ({ default: module.KnowledgeBase })));
 
@@ -28,8 +26,6 @@ function ScrollHandler() {
 }
 
 function App() {
-  const easterEggActivated = useCommandKEasterEgg();
-
   useEffect(() => {
     // Disable automatic scroll restoration to prevent browser-induced scroll jumps
     if ('scrollRestoration' in window.history) {
@@ -40,7 +36,6 @@ function App() {
   return (
     <Router>
       <ScrollHandler />
-      <EasterEgg isActive={easterEggActivated} />
       <Suspense fallback={<div role="status" className="min-h-screen bg-anchor-blue-900 text-anchor-slate flex items-center justify-center">Loading documentation…</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
