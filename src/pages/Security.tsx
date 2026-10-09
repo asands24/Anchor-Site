@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { LegalLayout } from '../components/LegalLayout';
-import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import { BOOKING_URL, CONTACT_EMAIL } from '../lib/offer';
 
 export const Security: React.FC = () => {
     useEffect(() => {
@@ -9,90 +9,56 @@ export const Security: React.FC = () => {
     }, []);
 
     return (
-        <LegalLayout title="Security Overview" lastUpdated={new Date().toLocaleDateString()}>
+        <LegalLayout title="How we protect your data">
             <SEO
-                title="Security Architecture"
-                description="Learn about Anchor's security architecture: database-level data isolation, layered security, and key management for enterprise AI support systems."
+                title="Security & privacy"
+                description="How Anchor keeps each business's content private, how AI providers handle your data, and what you control."
                 url="https://anchor-widget.com/security"
             />
+            <h2>Your content is private to your business</h2>
             <p>
-                Security is a core design principle of the Anchor architecture. This page outlines the security model used in this reference implementation to ensure tenant isolation and data protection.
+                Every business gets its own workspace. Each document, conversation and search is tagged to that workspace, and
+                the database itself enforces that your assistant can only read your content. Another Anchor customer's assistant can never see it.
             </p>
 
-            <p><a href="/security-implementation.md">Read the implementation reference</a> for source paths, policy examples, and deployment verification requirements. This page does not assert an independent security audit or compliance certification.</p>
-            <h2>Three Layers of Isolation</h2>
+            <h2>We never train AI on your data</h2>
             <p>
-                The implementation combines database policies with backend authorization and tenant-aware UI. Its security depends on the deployed policies, secrets, and request validation.
+                Answers are written by OpenAI's business API. OpenAI does not use API data to train its models by default and may keep
+                requests for up to 30 days for abuse monitoring. Anchor itself does not train models on your content or your customers' conversations.
             </p>
 
-            <h3>1. Database Layer</h3>
+            <h2>Only you decide where the assistant appears</h2>
             <p>
-                PostgreSQL row-level security restricts user-scoped access. Backend service-role operations bypass RLS and must check tenant membership and scope queries explicitly. A compromised privileged server can bypass these protections; RLS alone is not a guarantee against that threat.
+                We lock each assistant to your website's address, so it can't be copied onto someone else's site. We can switch it off instantly at your request.
             </p>
 
-            <h3>2. Application Layer</h3>
-            <p>
-                Our backend services explicitly filter data retrieval and processing based on customer context. This redundancy ensures that business logic aligns with data access policies.
-            </p>
-
-            <h3>3. Frontend Layer</h3>
-            <p>
-                The user interface uses secure authentication tokens to scope all API requests. The frontend is aware of the user's customer context and prevents rendering or requesting data that belongs to other customers.
-            </p>
-
-            <h2>Key Management & Separation</h2>
-            <p>
-                Correct key management is critical for security.
-            </p>
-            <div className="overflow-x-auto">
-                <table className="min-w-full text-left font-sm">
-                    <thead>
-                        <tr className="border-b border-anchor-slate/20">
-                            <th className="py-2 px-4 font-semibold text-anchor-blue-200">Key Type</th>
-                            <th className="py-2 px-4 font-semibold text-anchor-blue-200">Visibility</th>
-                            <th className="py-2 px-4 font-semibold text-anchor-blue-200">Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="border-b border-anchor-slate/10 text-anchor-slate/80">
-                            <td className="py-2 px-4 font-mono text-sm">SUPABASE_ANON_KEY</td>
-                            <td className="py-2 px-4"><span className="inline-block px-2 py-1 rounded bg-green-900/40 text-green-300 text-xs font-bold">PUBLIC</span></td>
-                            <td className="py-2 px-4">Safe to expose in client-side code for initiating requests.</td>
-                        </tr>
-                        <tr className="border-b border-anchor-slate/10 text-anchor-slate/80">
-                            <td className="py-2 px-4 font-mono text-sm">SERVICE_ROLE_KEY</td>
-                            <td className="py-2 px-4"><span className="inline-block px-2 py-1 rounded bg-red-900/40 text-red-300 text-xs font-bold">PRIVATE</span></td>
-                            <td className="py-2 px-4">Can bypass security policies. Must <strong>never</strong> be exposed to the client.</td>
-                        </tr>
-                        <tr className="text-anchor-slate/80">
-                            <td className="py-2 px-4 font-mono text-sm">OPENAI_API_KEY</td>
-                            <td className="py-2 px-4"><span className="inline-block px-2 py-1 rounded bg-red-900/40 text-red-300 text-xs font-bold">PRIVATE</span></td>
-                            <td className="py-2 px-4">Used only in secure server-side environments (e.g., Edge Functions).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2>Demo Environment Security</h2>
-            <p>
-                For this public demo, we implement additional measures:
-            </p>
+            <h2>What we store</h2>
             <ul>
-                <li><strong>Deployment controls:</strong> Configure and verify public demo access, rate limits, and allowed origins before exposing the backend.</li>
-                <li><strong>Data Minimization:</strong> We discourage entering PII and may periodically reset the database to maintain a clean state.</li>
+                <li><strong>Your content:</strong> the pages and documents you ask us to load.</li>
+                <li><strong>Conversations:</strong> questions and answers, so we can improve accuracy and send your monthly report.</li>
+                <li><strong>We don't ask visitors for</strong> names, emails or payment details.</li>
             </ul>
 
+            <h2>Deleting your data</h2>
+            <p>
+                Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> and we'll delete your content and conversation history. When you cancel, we delete it.
+            </p>
+
+            <h2>Keys and infrastructure</h2>
+            <p>
+                AI and database keys are kept on the server and never reach the browser. Admin tools require a separate key. Data is stored
+                with Supabase (PostgreSQL) and the service runs on Netlify; both encrypt data in transit.
+            </p>
+
+            <h2>For technical reviewers</h2>
+            <p>
+                The <a href="/security-implementation.md">implementation reference</a> covers isolation policies, key handling and how to verify a deployment.
+                Anchor has not completed a third-party audit such as SOC 2; if your industry requires one, tell us on the call.
+            </p>
+
             <div className="mt-8 p-6 rounded-lg bg-anchor-blue-900/40 border border-anchor-blue-500/20 text-center">
-                <h3 className="text-xl font-semibold text-white mb-2">Interested in a Private Instance?</h3>
-                <p className="mb-4 text-anchor-slate/80">
-                    We can deploy a dedicated, single-tenant instance for your organization to evaluate safely.
-                </p>
-                <Link
-                    to="/contact"
-                    className="inline-block px-6 py-3 rounded-md bg-anchor-blue-500 text-white font-medium hover:bg-anchor-blue-400 transition-colors"
-                >
-                    Request a Pilot
-                </Link>
+                <h3 className="text-xl font-semibold text-white mb-2">Questions about your situation?</h3>
+                <a href={BOOKING_URL} className="inline-block mt-2 px-6 py-3 rounded-md bg-anchor-blue-500 text-anchor-blue-900 font-bold no-underline">Book a setup call</a>
             </div>
         </LegalLayout>
     );

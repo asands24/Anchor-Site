@@ -36,7 +36,7 @@ export const Privacy: React.FC = () => {
             <ul>
                 <li>Operate availability of the public demo.</li>
                 <li>Prevent abuse and ensure system stability.</li>
-                <li>Improve the quality of the open-source codebase.</li>
+                <li>Improve the accuracy of Anchor assistants.</li>
             </ul>
 
             <h2>Service Providers</h2>
@@ -67,7 +67,7 @@ export const Privacy: React.FC = () => {
 
             <h2>Contact</h2>
             <p>
-                For any privacy-related questions regarding this demo, please contact us at <a href="mailto:privacy@example.com">privacy@example.com</a>.
+                For any privacy-related questions regarding this demo, please contact us at <a href="mailto:alex@asandstech.com">alex@asandstech.com</a>.
             </p>
         </LegalLayout>
     );

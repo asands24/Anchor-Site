@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { BOOKING_URL } from '../lib/offer';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -43,17 +44,16 @@ export const Navbar: React.FC = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <button onClick={() => handleNavigation('features')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Features</button>
-          <button onClick={() => handleNavigation('architecture')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Architecture</button>
+          <button onClick={() => handleNavigation('how-it-works')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">How it works</button>
+          <button onClick={() => handleNavigation('demo')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Demo</button>
           <button onClick={() => handleNavigation('pricing')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Pricing</button>
-          <button onClick={() => navigate('/knowledge')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Docs</button>
-          <button onClick={() => handleNavigation('developers')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">Developers</button>
-          <button
-            onClick={() => handleNavigation('demo')}
-            className="px-4 py-2 rounded border border-anchor-blue-500 text-anchor-blue-500 hover:bg-anchor-blue-500/10 transition-colors text-sm font-medium"
+                    <button onClick={() => handleNavigation('faq')} className="text-anchor-slate hover:text-anchor-blue-500 transition-colors text-sm font-medium">FAQ</button>
+          <a
+            href={BOOKING_URL}
+            className="px-4 py-2 rounded bg-anchor-blue-500 text-anchor-blue-900 hover:bg-anchor-blue-500/90 transition-colors text-sm font-bold"
           >
-            Live Demo
-          </button>
+            Book a call
+          </a>
         </div>
 
         {/* Mobile menu toggle */}
@@ -73,17 +73,16 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-anchor-blue-900 border-t border-anchor-slate/10 shadow-xl overflow-hidden py-4">
           <div className="flex flex-col px-6 space-y-4">
-            <button onClick={() => { handleNavigation('features'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">Features</button>
-            <button onClick={() => { handleNavigation('architecture'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">Architecture</button>
+            <button onClick={() => { handleNavigation('how-it-works'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">How it works</button>
+            <button onClick={() => { handleNavigation('demo'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">Demo</button>
             <button onClick={() => { handleNavigation('pricing'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">Pricing</button>
-            <button onClick={() => { navigate('/knowledge'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">Docs</button>
-            <button onClick={() => { handleNavigation('developers'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">Developers</button>
-            <button
-              onClick={() => { handleNavigation('demo'); setMobileMenuOpen(false); }}
-              className="px-4 py-2 mt-2 w-full text-center rounded border border-anchor-blue-500 text-anchor-blue-500 hover:bg-anchor-blue-500/10 transition-colors text-base font-medium"
+            <button onClick={() => { handleNavigation('faq'); setMobileMenuOpen(false); }} className="text-left text-anchor-slate hover:text-anchor-blue-500 transition-colors text-base font-medium py-2">FAQ</button>
+            <a
+              href={BOOKING_URL}
+              className="px-4 py-2 mt-2 w-full text-center rounded bg-anchor-blue-500 text-anchor-blue-900 font-bold text-base"
             >
-              Live Demo
-            </button>
+              Book a call
+            </a>
           </div>
         </div>
       )}
