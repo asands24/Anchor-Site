@@ -3,7 +3,7 @@ import React from 'react';
 const FEATURE_LIST = [
   {
     title: 'Secure Multi-Customer Architecture',
-    description: 'Complete data isolation for each customer at every layer—database, application, and UI. Built with PostgreSQL vector search to keep customer data completely separate.',
+    description: 'Tenant-scoped PostgreSQL retrieval and user-access policies. Privileged backend operations need explicit tenant authorization and deployment testing.',
     icon: '🏢'
   },
   {
@@ -22,13 +22,13 @@ const FEATURE_LIST = [
     icon: '📥'
   },
   {
-    title: 'Real-Time Streaming',
-    description: 'Instant, word-by-word AI responses as they are generated. Users see answers appear immediately, not after long waits.',
+    title: 'AI Responses',
+    description: 'AI mode requests an answer from your backend and displays the completed response. Sample mode animates answers bundled in the widget.',
     icon: '⚡'
   },
   {
     title: 'Conversation History',
-    description: 'Automatically saves chat history in the user browser, so conversations continue seamlessly across sessions.',
+    description: 'Stores a conversation identifier in this browser. Configured backends can record messages and logs; the widget does not reload history or sync messages across devices.',
     icon: '💾'
   }
 ];
@@ -40,7 +40,7 @@ export const Features: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Enterprise-grade Capabilities</h2>
           <p className="text-anchor-slate max-w-2xl mx-auto">
-            Anchor isn't a toy. It's a complete, opinionated system designed for real-world deployment requirements.
+            A source-code foundation for teams that want to operate and extend their own support system.
           </p>
         </div>
 

@@ -19,14 +19,15 @@ export const Security: React.FC = () => {
                 Security is a core design principle of the Anchor architecture. This page outlines the security model used in this reference implementation to ensure tenant isolation and data protection.
             </p>
 
+            <p><a href="/security-implementation.md">Read the implementation reference</a> for source paths, policy examples, and deployment verification requirements. This page does not assert an independent security audit or compliance certification.</p>
             <h2>Three Layers of Isolation</h2>
             <p>
-                Anchor implements defense-in-depth using three distinct layers of enforcement to prevent data leaks between tenants.
+                The implementation combines database policies with backend authorization and tenant-aware UI. Its security depends on the deployed policies, secrets, and request validation.
             </p>
 
             <h3>1. Database Layer</h3>
             <p>
-                We use PostgreSQL Row Level Security as the foundational barrier. Every database query automatically filters to the authenticated user's customer ID. Even if the application code fails, the database security policies prevent unauthorized access.
+                PostgreSQL row-level security restricts user-scoped access. Backend service-role operations bypass RLS and must check tenant membership and scope queries explicitly. A compromised privileged server can bypass these protections; RLS alone is not a guarantee against that threat.
             </p>
 
             <h3>2. Application Layer</h3>
@@ -77,7 +78,7 @@ export const Security: React.FC = () => {
                 For this public demo, we implement additional measures:
             </p>
             <ul>
-                <li><strong>Rate Limiting:</strong> Requests are throttled to prevent abuse and denial-of-service attacks.</li>
+                <li><strong>Deployment controls:</strong> Configure and verify public demo access, rate limits, and allowed origins before exposing the backend.</li>
                 <li><strong>Data Minimization:</strong> We discourage entering PII and may periodically reset the database to maintain a clean state.</li>
             </ul>
 

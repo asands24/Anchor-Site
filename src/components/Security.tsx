@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Security: React.FC = () => {
   return (
@@ -9,20 +10,20 @@ export const Security: React.FC = () => {
             Security at the Core. <span className="text-anchor-slate font-normal">Not an Afterthought.</span>
           </h2>
 
+          <p className="text-anchor-slate text-center mb-8">Inspect the <Link to="/security" className="text-anchor-blue-500 underline">security model and its limits</Link> and the <a href="/security-implementation.md" className="text-anchor-blue-500 underline">implementation reference</a>. No independent certification is asserted here.</p>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
               <h3 className="text-xl font-bold text-white mb-3">Database-Level Data Isolation</h3>
               <p className="text-anchor-slate leading-relaxed">
-                Every database query automatically filters by customer ID at the database level.
-                Even if your application is compromised, one customer cannot access another customer's data.
-                Enforced by PostgreSQL security policies.
+                Tenant-scoped retrieval uses tenant_id filters, with PostgreSQL row-level security for user-scoped access.
+                Service-role operations bypass RLS and require explicit authorization checks. Review and test both paths in your deployment.
               </p>
             </div>
 
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
               <h3 className="text-xl font-bold text-white mb-3">Layered Security Architecture</h3>
               <p className="text-anchor-slate leading-relaxed">
-                API keys and credentials are never exposed in browser code. The chat widget communicates with secure backend
+                OpenAI and Supabase service-role secrets belong on the server. Public Supabase client keys are designed for browser use. The chat widget communicates with secure backend
                 services that handle all authentication with OpenAI and the database.
               </p>
             </div>
@@ -31,14 +32,14 @@ export const Security: React.FC = () => {
               <h3 className="text-xl font-bold text-white mb-3">Separated Access Credentials</h3>
               <p className="text-anchor-slate leading-relaxed">
                 Administrative tools use privileged credentials for data management.
-                Public-facing widgets use restricted, low-permission access keys that limit potential damage.
+                The widget calls a backend that must enforce access rules; keeping a service key on the server does not replace tenant validation.
               </p>
             </div>
 
             <div className="p-6 rounded bg-anchor-blue-800/20 border border-anchor-blue-500/10">
               <h3 className="text-xl font-bold text-white mb-3">Complete Activity Tracking</h3>
               <p className="text-anchor-slate leading-relaxed">
-                Every interaction is logged with unique tracking identifiers, allowing you to trace any request through the entire system.
+                The backend includes request identifiers, retrieval logs, and LLM usage logs when database logging is configured. Bundled sample responses do not create backend logs.
               </p>
             </div>
           </div>
