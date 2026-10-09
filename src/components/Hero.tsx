@@ -13,21 +13,21 @@ export const Hero: React.FC = () => {
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6">
       <div className="container mx-auto max-w-5xl text-center">
         <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-anchor-blue-800/50 border border-anchor-blue-500/30 text-anchor-blue-500 text-sm font-medium animate-float-slow">
-          Looking for a framework? This isn't one.
+          Source-code license · Deploy in your infrastructure
         </div>
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-8 leading-tight">
-          Production-ready, multi-tenant <br />
+          Multi-tenant <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-anchor-blue-500 to-blue-400">
             AI support copilot
           </span>
         </h1>
 
         <p className="text-anchor-slate text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          A definitive reference implementation for enterprise AI support automation.
+          A reference implementation for teams building AI support automation.
           Built with document search, secure multi-customer architecture, embeddable chat widgets, and complete admin visibility.
           <br className="hidden md:block" />
-          <span className="text-anchor-blue-500/80">Opinionated. Secure. Ready to deploy.</span>
+          <span className="text-anchor-blue-500/80">Inspect the implementation. Configure it for your deployment.</span>
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

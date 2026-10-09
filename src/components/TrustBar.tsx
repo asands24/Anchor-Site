@@ -5,7 +5,7 @@ export const TrustBar: React.FC = () => {
     <div className="border-y border-anchor-slate/10 bg-anchor-blue-900/30 backdrop-blur-sm">
       <div className="container mx-auto py-8">
         <p className="text-center text-sm font-semibold text-anchor-slate mb-6 uppercase tracking-widest opacity-70">
-          The Enterprise Standard For
+          Built around
         </p>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
           {['Security', 'Isolation', 'Observability', 'Scalability'].map((item) => (

@@ -13,8 +13,8 @@ export const Architecture: React.FC = () => {
                             Built on a Proven Stack
                         </h2>
                         <p className="text-anchor-slate text-lg mb-8 leading-relaxed">
-                            Anchor leverages industry-standard infrastructure to ensure reliability, security, and performance.
-                            No experimental databases or fragile glues. Just solid engineering.
+                            Anchor combines a React widget, Netlify Functions, Supabase PostgreSQL, and OpenAI.
+                            Functions access Supabase over HTTPS; database connection management belongs to the Supabase service.
                         </p>
 
                         <ul className="space-y-4">
@@ -65,7 +65,7 @@ export const Architecture: React.FC = () => {
                                 </div>
 
                                 {/* Arrow Down */}
-                                <div className="text-anchor-slate">↓↓ TCP / Postgres Protocol ↓↓</div>
+                                <div className="text-anchor-slate">↓↓ HTTPS / Supabase API + RPC ↓↓</div>
 
                                 {/* Data Layer */}
                                 <div className="p-6 rounded border border-green-500/30 bg-anchor-blue-900 shadow-[0_0_30px_rgba(74,222,128,0.05)]">

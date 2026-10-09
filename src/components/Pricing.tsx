@@ -13,7 +13,7 @@ export const Pricing: React.FC = () => {
                 <div className="max-w-3xl mx-auto text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Ready to drop anchor?</h2>
                     <p className="text-lg text-anchor-slate">
-                        Choose the Anchor license that fits your rollout, with optional support once you are live.
+                        Choose the Anchor license that fits your rollout, with optional support once you are live. Hosting, database, and AI-provider usage are billed separately. You operate and maintain the deployment, including model/API changes; the license is not a managed-service subscription.
                     </p>
                 </div>
 
